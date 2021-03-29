@@ -11,12 +11,29 @@
     :root {
       --button-height: 32px;
       --font-size: 14px;
+      --button-bg: white;
+      --button-active-bg: #eee;
+      --border-radius: 4px;
+      --color: #333;
+      --border-color: #999;
+      --border-color-hover: #666;
+    }
+    #app {
+      margin: 20px;
+    }
+    body {
+      font-size: var(--font-size)
     }
   </style>
   <style>
     .g-button {
       font-size: var(--font-size);
-      height: var(--button-height)
+      height: var(--button-height);
+      /*加宽度不好用padding*/
+      padding: 0 1em; /*width*/
+      border-radius: var(--border-radius);
+      border: 1px solid var(--border-color);
+      background: var(--button-bg);
     }
   </style>
 </head>
