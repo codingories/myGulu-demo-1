@@ -7,3 +7,8 @@
   box-sizing: border-box;
 }
 ```
+
+### 开发命令
+```
+```
+./node_modules/.bin/parcel index.html  --no-cache

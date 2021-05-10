@@ -1,8 +1,14 @@
 <template>
-   <button class="g-button">按钮</button>
+   <button class="g-button">
+      <svg class="icon" v-if="icon" :class="{[`icon-iconPosition`]: true}">
+         <use :xlink:href="`#i-${icon}`"></use>
+      </svg>
+      <slot></slot>
+   </button>
 </template>
 <script>
   export default {
+     props: ['icon', 'iconPosition']
   }
 </script>
 <style lang="scss">
