@@ -23,6 +23,7 @@
      border: 1px solid var(--border-color);
      background: var(--button-bg);
       display: inline-flex;justify-content: center;align-items: center;
+      vertical-align: middle;
      &:hover {
        border-color: var(--border-color-hover);
      }
@@ -37,14 +38,17 @@
       }
       > .icon {
          order: 1;
+         margin-right: .3em;
       }
 
       & .icon-right{
-         > .icon-right {
+         > .icon {
             order: 2
          }
          > .content {
             order: 1;
+            margin-left: .3em;
+            margin-right: 0;
          }
       }
    }
