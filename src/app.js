@@ -16,9 +16,32 @@ new Vue({
   }
 })
 
-{
-  // 直接打印Button，发现是一个对象,我们没办法通过对象实例化东西
-  console.log(Button)
-  // 我们需要用Vue构造一个函数
+import chai from 'chai'
+const expect = chai.expect
 
+{
+  const Constructor = Vue.extend(Button)
+  const button = new Constructor({
+    propsData: {
+      icon: 'settings'
+    }
+  })
+  button.$mount('')
+  let useElement = button.$el.querySelector('use')
+  let href = useElement.getAttribute('xlink:href')
+  expect(href).to.eq('#i-settings')
+}
+
+{
+  const Constructor = Vue.extend(Button)
+  const button = new Constructor({
+    propsData: {
+      icon: 'settings',
+      loading: true
+    }
+  })
+  button.$mount('')
+  let useElement = button.$el.querySelector('use')
+  let href = useElement.getAttribute('xlink:href')
+  expect(href).to.eq('#i-loading')
 }
