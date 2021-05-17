@@ -7,7 +7,7 @@ Vue.config.devtools = false
 
 describe('Button', () => {
   it('存在.', () => {
-    expect(Button).to.be.ok //不是false值就ok
+    expect(Button).to.exist //不是false值就ok
   })
 
   it('可以设置icon.', () => {
@@ -78,7 +78,5 @@ describe('Button', () => {
     vm.$on('click', callback)
     vm.$el.click()
     expect(callback).to.have.been.called
-
   })
-
 })
