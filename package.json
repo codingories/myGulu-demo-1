@@ -1,11 +1,12 @@
 {
   "name": "mygulu-demo-test-1-1",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "这是一个UI框架",
   "main": "dist/index.js",
   "scripts": {
     "dev-test": "parcel watch test/* --no-cache & karma start",
-    "test": "parcel build test/* --no-cache --no-minify && karma start --single-run"
+    "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
+    "build": "npx parcel build index.js --no-cache --no-minify"
   },
   "repository": {
     "type": "git",
