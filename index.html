@@ -37,49 +37,28 @@
       margin: 20px;
     }
   </style>
-  <style>
-    .row {
-      display: flex;
-    }
-    .col {
-      height: 100px;
-      background-color: blue;
-      width: 50%;
-      border: 1px solid red;
-    }
-    .col[data-span="2"]{
-      width: 8.333333%;
-    }
-    .col[data-span="22"]{
-      width:91.666667%;
-    }
-  </style>
 </head>
 <body>
 <div id="app">
-  <div class="row">
-    <div class="col"></div>
-    <div class="col"></div>
-  </div>
-  <div class="row">
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"></div>
-  </div>
-  <div class="row">
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"></div>
-    <div class="col"></div>
-  </div>
-  <div class="row">
-    <div class="col"></div>
-    <div class="col"></div>
-  </div>
-  <div class="row">
-    <div class="col" data-span="2"></div>
-    <div class="col" data-span="22"></div>
-  </div>
+  <g-row>
+    <g-col>1</g-col>
+    <g-col>2</g-col>
+  </g-row>
+  <g-row>
+    <g-col>1</g-col>
+    <g-col>2</g-col>
+    <g-col>3</g-col>
+  </g-row>
+  <g-row>
+    <g-col>1</g-col>
+    <g-col>2</g-col>
+    <g-col>3</g-col>
+    <g-col>4</g-col>
+  </g-row>
+  <g-row>
+    <g-col>1</g-col>
+    <g-col>11</g-col>
+  </g-row>
   <hr>
 <!--  <div class="box">-->
 <!--    <g-input value="张三" disabled></g-input>-->
