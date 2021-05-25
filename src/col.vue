@@ -1,12 +1,22 @@
 <template>
-  <div class="col">
+  <div class="col" :class="[`col-${span}`]">
     <slot></slot>
   </div>
 </template>
+<script>
+  export default {
+    name: 'GuluCol',
+    props: {
+      span: {
+        type: [Number, String]
+      }
+    }
+  }
+</script>
 <style scoped lang="scss">
   .col {
     height: 100px;
-    background-color: blue;
+    background-color: gray;
     width: 50%;
     border: 1px solid red;
 
