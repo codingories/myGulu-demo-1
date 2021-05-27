@@ -39,8 +39,41 @@
   </style>
 </head>
 <body>
+<style>
+  .demoBox {
+    height: 50px;
+    background-color: grey;
+    border: 1px solid red;
+  }
+</style>
 <div id="app">
   <div style="border: 1px solid black">
+<!--    <g-row class="topbar">-->
+<!--      <g-col class="demoBox" span="9" align="left">-->
+<!--        <g-row align="left">-->
+<!--          <g-col style="wdith: 50px">1</g-col>-->
+<!--          <g-col>2</g-col>-->
+<!--          <g-col>3</g-col>-->
+<!--          <g-col>4</g-col>-->
+<!--        </g-row>-->
+<!--      </g-col>-->
+<!--      <g-col class="demoBox" span="15" >-->
+<!--        <g-row align="right">-->
+<!--          <g-col>1</g-col>-->
+<!--          <g-col>2</g-col>-->
+<!--          <g-col>3</g-col>-->
+<!--          <g-col>4</g-col>-->
+<!--          <g-col>5</g-col>-->
+<!--          <g-col>6</g-col>-->
+<!--          <g-col>7</g-col>-->
+<!--        </g-row>-->
+<!--      </g-col>-->
+<!--    </g-row>-->
+<!--    <g-row closs="logo-and-search-adn-qrcode">-->
+<!--      <g-col class="demoBox" span="4"></g-col>-->
+<!--      <g-col class="demoBox" span="14"></g-col>-->
+<!--      <g-col class="demoBox" span="6"></g-col>-->
+<!--    </g-row>-->
   <g-row gutter="20">
     <g-col>1</g-col>
     <g-col>2</g-col>
@@ -64,9 +97,6 @@
     <g-col span="2">1</g-col>
     <g-col span="20" offset="2">11</g-col>
   </g-row>
-
-
-
   <g-row gutter="20">
     <g-col span="4">1</g-col>
     <g-col span="18" offset="2">11</g-col>
@@ -84,13 +114,8 @@
   </div>
   <hr>
 <!--  <div class="box">-->
-<!--    <g-input value="张三" disabled></g-input>-->
-<!--    <g-input value="李四" readonly></g-input>-->
-<!--    <g-input value="王五"></g-input>-->
+<!--    <g-input value="王" error="姓名不能少于两个字" @change="inputChange"></g-input>-->
 <!--  </div>-->
-  <div class="box">
-    <g-input value="王" error="姓名不能少于两个字" @change="inputChange"></g-input>
-  </div>
 <!--  <div class="box">-->
 <!--    <g-input value="王" error="姓名不能少于两个字"></g-input>-->
 <!--  </div>-->

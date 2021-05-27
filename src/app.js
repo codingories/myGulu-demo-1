@@ -21,12 +21,11 @@ new Vue({
     loading3: false
   },
   created(){
-    setTimeout(()=>{
-      console.log('fff')
-      let event = new Event('change')
-      let inputElement = this.$el.querySelector('input')
-      inputElement.dispatchEvent(event)
-    },3000)
+    // setTimeout(()=>{
+    //   let event = new Event('change')
+    //   let inputElement = this.$el.querySelector('input')
+    //   inputElement.dispatchEvent(event)
+    // },3000)
   },
   methods: {
     inputChange(e){

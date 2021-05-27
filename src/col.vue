@@ -1,6 +1,5 @@
 <template>
-  <div class="col" :class="rowStyle"
-    :style="colStyle">
+  <div class="col" :class="colClass" :style="colStyle">
     <slot></slot>
   </div>
 </template>
@@ -26,7 +25,7 @@
       })
     },
     computed: {
-      rowStyle(){
+      colClass(){
         let { span, offset } = this
         return [span && `col-${span}`,offset && `offset-${offset}`]
       },
@@ -42,7 +41,6 @@
 <style scoped lang="scss">
   .col {
     height: 100px;
-    width: 50%;
     padding: 0 10px;
     $class-prefix: col-;
     @for $n from 1 through 24 {
