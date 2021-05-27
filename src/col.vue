@@ -1,9 +1,7 @@
 <template>
-  <div class="col" :class="[span && `col-${span}`,offset && `offset-${offset}`]"
-    :style="{paddingLeft: gutter/2 + 'px', paddingRight: gutter/2+'px'}">
-    <div style="border: 1px solid green">
+  <div class="col" :class="rowStyle"
+    :style="colStyle">
     <slot></slot>
-    </div>
   </div>
 </template>
 <script>
@@ -26,6 +24,18 @@
       this.$children.forEach((vm)=>{
         vm.gutter = this.gutter
       })
+    },
+    computed: {
+      rowStyle(){
+        let { span, offset } = this
+        return [span && `col-${span}`,offset && `offset-${offset}`]
+      },
+      colStyle(){
+        return {
+          paddingLeft: this.gutter/2 + 'px',
+          paddingRight: this.gutter/2+ 'px'
+        }
+      }
     }
   }
 </script>
