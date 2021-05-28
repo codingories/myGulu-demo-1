@@ -48,69 +48,84 @@
 </style>
 <div id="app">
   <div style="border: 1px solid black">
-<!--    <g-row class="topbar">-->
-<!--      <g-col class="demoBox" span="9" align="left">-->
-<!--        <g-row align="left">-->
-<!--          <g-col style="wdith: 50px">1</g-col>-->
-<!--          <g-col>2</g-col>-->
-<!--          <g-col>3</g-col>-->
-<!--          <g-col>4</g-col>-->
-<!--        </g-row>-->
-<!--      </g-col>-->
-<!--      <g-col class="demoBox" span="15" >-->
-<!--        <g-row align="right">-->
-<!--          <g-col>1</g-col>-->
-<!--          <g-col>2</g-col>-->
-<!--          <g-col>3</g-col>-->
-<!--          <g-col>4</g-col>-->
-<!--          <g-col>5</g-col>-->
-<!--          <g-col>6</g-col>-->
-<!--          <g-col>7</g-col>-->
-<!--        </g-row>-->
-<!--      </g-col>-->
-<!--    </g-row>-->
+    <g-row class="topbar">
+      <g-col class="demoBox" span="9" align="left">
+        <g-row align="left">
+          <g-col style="wdith: 50px">1</g-col>
+          <g-col>2</g-col>
+          <g-col>3</g-col>
+          <g-col>4</g-col>
+        </g-row>
+      </g-col>
+      <g-col class="demoBox" span="15" >
+        <g-row align="right">
+          <g-col>1</g-col>
+          <g-col>2</g-col>
+          <g-col>3</g-col>
+          <g-col>4</g-col>
+          <g-col>5</g-col>
+          <g-col>6</g-col>
+          <g-col>7</g-col>
+        </g-row>
+      </g-col>
+    </g-row>
 <!--    <g-row closs="logo-and-search-adn-qrcode">-->
 <!--      <g-col class="demoBox" span="4"></g-col>-->
 <!--      <g-col class="demoBox" span="14"></g-col>-->
 <!--      <g-col class="demoBox" span="6"></g-col>-->
 <!--    </g-row>-->
+
+<!--  <g-row gutter="20">-->
+<!--    <g-col>1</g-col>-->
+<!--    <g-col>2</g-col>-->
+<!--  </g-row>-->
+<!--  <g-row gutter="20">-->
+<!--    <g-col>1</g-col>-->
+<!--    <g-col>2</g-col>-->
+<!--    <g-col>3</g-col>-->
+<!--  </g-row>-->
+<!--  <g-row gutter="20">-->
+<!--    <g-col>1</g-col>-->
+<!--    <g-col>2</g-col>-->
+<!--    <g-col>3</g-col>-->
+<!--    <g-col>4</g-col>-->
+<!--  </g-row>-->
+<!--  <g-row gutter="20">-->
+<!--    <g-col span="2">1</g-col>-->
+<!--    <g-col span="22">11</g-col>-->
+<!--  </g-row>-->
   <g-row gutter="20">
-    <g-col>1</g-col>
-    <g-col>2</g-col>
+    <g-col span="2"
+           :phone="{span: 12}"
+           :ipad="{span:8}"
+           :pc="{span:2}"
+           :narrow-pc="{span:4}"
+           :wide-pc="{span:1}"
+    >11111</g-col>
+
+    <g-col span="20"
+           :phone="{span:12}"
+           :ipad="{span:16}"
+           :pc="{span:22}"
+           :narrow-pc="{span:20}"
+           :wide-pc="{span:23}"
+           >11</g-col>
+
   </g-row>
-  <g-row gutter="20">
-    <g-col>1</g-col>
-    <g-col>2</g-col>
-    <g-col>3</g-col>
-  </g-row>
-  <g-row gutter="20">
-    <g-col>1</g-col>
-    <g-col>2</g-col>
-    <g-col>3</g-col>
-    <g-col>4</g-col>
-  </g-row>
-  <g-row gutter="20">
-    <g-col span="2">1</g-col>
-    <g-col span="22">11</g-col>
-  </g-row>
-  <g-row gutter="20">
-    <g-col span="2">1</g-col>
-    <g-col span="20" offset="2">11</g-col>
-  </g-row>
-  <g-row gutter="20">
-    <g-col span="4">1</g-col>
-    <g-col span="18" offset="2">11</g-col>
-  </g-row>
-    <g-row gutter="20">
-      <g-col span="4">1</g-col>
-      <g-col span="８" offset="2">1</g-col>
-      <g-col span="8" offset="2">11</g-col>
-    </g-row>
-    <g-row gutter="20">
-      <g-col span="4">1</g-col>
-      <g-col span="4" offset="6">1</g-col>
-      <g-col span="8" offset="2">11</g-col>
-    </g-row>
+<!--  <g-row gutter="20">-->
+<!--    <g-col span="4">1</g-col>-->
+<!--    <g-col span="18" offset="2">11</g-col>-->
+<!--  </g-row>-->
+<!--    <g-row gutter="20">-->
+<!--      <g-col span="4">1</g-col>-->
+<!--      <g-col span="８" offset="2">1</g-col>-->
+<!--      <g-col span="8" offset="2">11</g-col>-->
+<!--    </g-row>-->
+<!--    <g-row gutter="20">-->
+<!--      <g-col span="4">1</g-col>-->
+<!--      <g-col span="4" offset="6">1</g-col>-->
+<!--      <g-col span="8" offset="2">11</g-col>-->
+<!--    </g-row>-->
   </div>
   <hr>
 <!--  <div class="box">-->
