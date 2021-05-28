@@ -64,9 +64,9 @@
 </script>
 <style scoped lang="scss">
   .col {
-    height: 100px;
     padding: 0 10px;
     $class-prefix: col-;
+
     @for $n from 1 through 24 {
       &.#{$class-prefix}#{$n} {
         width: ($n / 24) * 100%;
