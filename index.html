@@ -45,6 +45,11 @@
     background-color: grey;
     border: 1px solid red;
   }
+  .demo {
+    background-color: #ddd;
+    border: 1px solid #666;
+    height: 100px;
+  }
 </style>
 <div id="app">
   <div style="border: 1px solid black">
@@ -74,21 +79,43 @@
 <!--    <g-col span="2">1</g-col>-->
 <!--    <g-col span="22">11</g-col>-->
 <!--  </g-row>-->
-  <g-row gutter="20">
-    <g-col span="24"
-           :ipad="{span:8}"
-           :pc="{span:2}"
-           :narrow-pc="{span:4}"
-           :wide-pc="{span:1}"
-    >11111</g-col>
 
-    <g-col span="24"
-           :ipad="{span:16}"
-           :pc="{span:22}"
-           :narrow-pc="{span:20}"
-           :wide-pc="{span:23}"
-           >11</g-col>
-  </g-row>
+<!--  <g-row gutter="20">-->
+<!--    <g-col span="24"-->
+<!--           :ipad="{span:8}"-->
+<!--           :pc="{span:2}"-->
+<!--           :narrow-pc="{span:4}"-->
+<!--           :wide-pc="{span:1}"-->
+<!--    >11111</g-col>-->
+
+<!--    <g-col span="24"-->
+<!--           :ipad="{span:16}"-->
+<!--           :pc="{span:22}"-->
+<!--           :narrow-pc="{span:20}"-->
+<!--           :wide-pc="{span:23}"-->
+<!--           >11</g-col>-->
+<!--  </g-row>-->
+
+    <g-row>
+      <g-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+        <div class="demo" ></div>
+      </g-col>
+      <g-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+        <div class="demo" ></div>
+      </g-col>
+      <g-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+        <div class="demo" ></div>
+      </g-col>
+      <g-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+        <div class="demo" ></div>
+      </g-col>
+      <g-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+        <div class="demo" ></div>
+      </g-col>
+      <g-col span="24" :ipad="{span:12}" :narrow-pc="{span:8}">
+        <div class="demo" ></div>
+      </g-col>
+    </g-row>
 <!--  <g-row gutter="20">-->
 <!--    <g-col span="4">1</g-col>-->
 <!--    <g-col span="18" offset="2">11</g-col>-->
