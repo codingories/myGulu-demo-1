@@ -20,6 +20,9 @@
     created() {
     },
     mounted() {
+      this.$children.forEach((vm)=>{
+        vm.gutter = this.gutter
+      })
     },
     computed: {
       rowStyle(){
@@ -27,7 +30,6 @@
         return {marginLeft: -gutter/2 + 'px', marginRight: -gutter/2 + 'px'}
       },
       rowClass () {
-        console.log('align123')
         let {align} = this
         return [align && `align-${align}`]
       }
