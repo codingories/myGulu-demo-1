@@ -8,10 +8,6 @@
    </button>
 </template>
 <script>
-   // 全局
-   // import Vue from 'vue'
-   // import Icon from './icon'
-   // Vue.component('g-icon', Icon)
   import Icon from './icon'
   export default {
       components: {
