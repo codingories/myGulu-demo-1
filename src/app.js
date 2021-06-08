@@ -35,8 +35,17 @@ new Vue({
     loading3: false
   },
   created(){
-    this.$toast('<p>段段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落落完段段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落落完<a href="http://www.qq.com">qq</a></p>', {
-      enableHtml: true
+    this.$toast('你的智商需要充值!', {
+      position: 'bottom',
+      enableHtml: true,
+      closeButton: {
+        text: '已充值',
+        callback () {
+          console.log('他说已经充值智商了')
+        }
+      },
+      autoClose:  false,
+      autoCloseDelay: 3
     })
   },
   methods: {
