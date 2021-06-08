@@ -81,8 +81,7 @@
         if (this.closeButton && typeof this.closeButton.callback === 'function') {
           this.closeButton.callback(this) // 当前toast实例
         }
-      },
-
+      }
     }
   }
 </script>
