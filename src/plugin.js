@@ -6,9 +6,7 @@ export default {
       let Constructor = Vue.extend( Toast )
       let toast = new Constructor({
         // 把closeButton从用户的选项里拿出来，作为propsData传给toast
-        propsData: {
-          closeButton: toastOptions.closeButton
-        }
+        propsData: toastOptions
       })
       toast.$slots.default = [message]
       toast.$mount()

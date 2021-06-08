@@ -35,17 +35,9 @@ new Vue({
     loading3: false
   },
   created(){
-    this.$toast('我是 message',
-      {
-        closeButton: {
-          text: '知道了',
-          callback(toast){
-            toast.log()
-            console.log('用户说他知道了')
-          }
-        }
-      }
-    )
+    this.$toast('<p>段段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落落完段段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落段落落完<a href="http://www.qq.com">qq</a></p>', {
+      enableHtml: true
+    })
   },
   methods: {
     showToast(){
