@@ -71,6 +71,7 @@
       },
       close () {
         this.$el.remove()
+        this.emit('close')
         this.$destroy()
       },
       log () {
@@ -91,6 +92,7 @@
   $toast-min-height: 40px;
   $toast-bg: rgba(0,0,0,0.75);
   .toast {
+    animation: fadeIn 1s;
     font-size: $font-size;
     line-height: 1.8;
     min-height: $toast-min-height;
