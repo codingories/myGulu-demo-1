@@ -91,6 +91,10 @@
   $font-size: 14px;
   $toast-min-height: 40px;
   $toast-bg: rgba(0,0,0,0.75);
+  @keyframes fadeIn {
+    0% { opacity: 0; transform: translateY(100%);}
+    100% { opacity: 1; transform: translateY(0%);}
+  }
   .toast {
     animation: fadeIn 1s;
     font-size: $font-size;
