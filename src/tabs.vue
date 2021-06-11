@@ -4,8 +4,14 @@
   </div>
 </template>
 <script>
+  import Vue from 'vue'
   export default {
     name: 'GuluTabsTabs',
+    data(){
+      return {
+        eventBus: new Vue()
+      }
+    },
     props: {
       selected: {
         type: String,
@@ -19,9 +25,14 @@
         }
       }
     },
+    provide() {
+      return {
+        eventBus: this.eventBus
+      }
+    },
     created(){
-      // 这个组件必须要触发update:selected事件才能使外面.sync有用
-      // this.$emit('update:selected', 'xxx')
+      this.$emit('update:selected', '这是 this $emit 出来的数据')
+      this.eventBus.$emit('update:selected', '这是 this eventBus $emit 出来的数据')
     }
   }
 </script>
