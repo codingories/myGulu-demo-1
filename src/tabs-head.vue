@@ -10,10 +10,7 @@
   export default {
     name: 'GuluTabsHead',
     inject: ['eventBus'],
-    created(){
-      console.log('爷爷给爸爸的eventBus')
-      console.log(this.eventBus)
-    }
+    created(){}
   }
 </script>
 <style scoped lang="scss">
@@ -21,8 +18,6 @@
   .tabs-head {
     display: flex;
     height: $tab-height;
-    justify-content: flex-start;
-    align-items: center;
     border: 1px solid red;
     > .actions-wrapper {
       margin-left: auto;
