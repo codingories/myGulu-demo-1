@@ -48,31 +48,20 @@
     height: 50px;
   }
 </style>
-<div id="app">
-  <g-tabs :selected = "selectedTab" @update:selected="selectedTab = $event">
-    <g-tabs-head selected="sports">
-      <g-tabs-item name="woman" disabled>
-        <g-icon name="settings"></g-icon>美女
-      </g-tabs-item>
-      <g-tabs-item name="finance">
-        财经
-      </g-tabs-item>
-      <g-tabs-item name="sports">
-        体育
-      </g-tabs-item>
-    </g-tabs-head>
-    <g-tabs-body>
-      <g-tabs-pane name="woman">美女相关资讯</g-tabs-pane>
-      <g-tabs-pane name="finance">财经相关资讯</g-tabs-pane>
-      <g-tabs-pane name="sports">体育相关资讯</g-tabs-pane>
-    </g-tabs-body>
-  </g-tabs>
+<div id="app" >
+  <g-popover>
+    <template slot="content">
+      <div>popover内容111</div>
+    </template>
+    <button>点我</button>
+  </g-popover>
+  <g-popover>
+    <template slot="content">
+      <div>popover内容222</div>
+    </template>
+    <button>点我</button>
+  </g-popover>
 </div>
-
-  <g-tabs>
-    <div>hi</div>
-  </g-tabs>
-
 
 <script src="./src/app.js"></script>
 
