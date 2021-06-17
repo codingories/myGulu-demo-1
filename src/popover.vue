@@ -55,7 +55,7 @@
 }
 </script>
 <style lang='scss' scoped>
-  .popover {
+  .popover { 
     display: inline-block;
     vertical-align: top;
     position: relative;
