@@ -54,7 +54,6 @@
         } else if (this.position === 'right') {
           contentWrapper.style.left = left + window.scrollX + width + 'px'
           contentWrapper.style.top = top + window.scrollY+ 'px'
-          let { height: height2 } = contentWrapper.getBoundingClientRect()
           this.$nextTick(()=>{
             let { height: height2 } = contentWrapper.getBoundingClientRect()
             contentWrapper.style.top = top + window.scrollY +
