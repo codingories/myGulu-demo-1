@@ -35,16 +35,32 @@
     },
     methods: {
       positionContent() {
-        document.body.appendChild(this.$refs.contentWrapper)
-        let { width, height, top, left} = this.$refs.triggerWrapper.getBoundingClientRect()
+        const { contentWrapper, triggerWrapper } = this.$refs
+        document.body.appendChild(contentWrapper)
+        let { width, height, top, left} = triggerWrapper.getBoundingClientRect()
         if (this.position === 'top') {
-          this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
-          this.$refs.contentWrapper.style.top = top + window.scrollY+ 'px'
+          contentWrapper.style.left = left + window.scrollX + 'px'
+          contentWrapper.style.top = top + window.scrollY+ 'px'
         } else if (this.position === 'bottom') {
-          this.$refs.contentWrapper.style.left = left + window.scrollX + 'px'
-          this.$refs.contentWrapper.style.top = top + height + window.scrollY+ 'px'
+          contentWrapper.style.left = left + window.scrollX + 'px'
+          contentWrapper.style.top = top + height + window.scrollY+ 'px'
+        } else if (this.position === 'left') {
+          contentWrapper.style.left = left + window.scrollX + 'px'
+          this.$nextTick(()=>{
+            let { height: height2 } = contentWrapper.getBoundingClientRect()
+            contentWrapper.style.top = top + window.scrollY +
+              (height - height2 ) / 2 + 'px'
+          })
+        } else if (this.position === 'right') {
+          contentWrapper.style.left = left + window.scrollX + width + 'px'
+          contentWrapper.style.top = top + window.scrollY+ 'px'
+          let { height: height2 } = contentWrapper.getBoundingClientRect()
+          this.$nextTick(()=>{
+            let { height: height2 } = contentWrapper.getBoundingClientRect()
+            contentWrapper.style.top = top + window.scrollY +
+              (height - height2 ) / 2 + 'px'
+          })
         }
-
       },
       onClickDocument (e) {
         // div已经移到popover外面去了，当用户点击popover的时候还是点击Popover外面
@@ -135,9 +151,40 @@
       }
       &::after {
         border-bottom-color: white;
-        bottom: calc(100% - 2px);
+        bottom: calc(100% - 1px);
+      }
+    }
+    &.position-left {
+      transform: translateX(-100%);
+      margin-left: -10px;
+      &::before, &::after {
+        transform: translateY(-50%);
+        top: 50%;
+      }
+      &::before {
+        border-left-color: black;
+        left: 100%;
+      }
+      &::after {
+        border-left-color: white;
+        left: calc(100% - 1px);
       }
 
+    }
+    &.position-right {
+      margin-left:   10px;
+      &::before, &::after {
+        transform: translateY(-50%);
+        top: 50%;
+      }
+      &::before {
+        border-right-color: black;
+        right: 100%;
+      }
+      &::after {
+        border-right-color: white;
+        right: calc(100% - 1px);
+      }
     }
   }
 </style>
