@@ -1,9 +1,7 @@
 <template>
   <div class="popover" @click="onClick" ref="popover">
-    {{position}}
     <div ref="contentWrapper" class="content-wrapper"  v-show="visible"
-      :class="{[`position-${position}`] : true}"
-    >
+      :class="{[`position-${position}`] : true}">
       <slot name="content"></slot>
     </div>
     <span ref="triggerWrapper" style="display: inline-block;">
@@ -15,23 +13,16 @@
   export default {
     name: 'GuluPopover',
     data(){
-      return {
-        visible: false
-      }
+      return {visible: false}
     },
-    // props: ['position'],
-
     props: {
       position: {
         type: String,
         default: 'top',
         validator (value) {
-          console.log('valie',12,value)
           return ['top', 'bottom', 'left', 'right'].indexOf(value) >= 0
         }
       }
-    },
-    mounted(){
     },
     methods: {
       positionContent() {
@@ -46,37 +37,31 @@
           contentWrapper.style.top = top + height + window.scrollY+ 'px'
         } else if (this.position === 'left') {
           contentWrapper.style.left = left + window.scrollX + 'px'
-          this.$nextTick(()=>{
-            let { height: height2 } = contentWrapper.getBoundingClientRect()
-            contentWrapper.style.top = top + window.scrollY +
-              (height - height2 ) / 2 + 'px'
-          })
+          let { height: height2 } = contentWrapper.getBoundingClientRect()
+          contentWrapper.style.top = top + window.scrollY +
+            (height - height2 ) / 2 + 'px'
         } else if (this.position === 'right') {
           contentWrapper.style.left = left + window.scrollX + width + 'px'
           contentWrapper.style.top = top + window.scrollY+ 'px'
-          this.$nextTick(()=>{
-            let { height: height2 } = contentWrapper.getBoundingClientRect()
-            contentWrapper.style.top = top + window.scrollY +
-              (height - height2 ) / 2 + 'px'
-          })
+          let { height: height2 } = contentWrapper.getBoundingClientRect()
+          contentWrapper.style.top = top + window.scrollY +
+            (height - height2 ) / 2 + 'px'
         }
       },
       onClickDocument (e) {
-        // div已经移到popover外面去了，当用户点击popover的时候还是点击Popover外面
         if (this.$refs.popover &&
           (this.$refs.popover === e.target ||
             this.$refs.popover.contains(e.target))
         ) {return }
-        // 再加个判断，如果this.$refs有contentWrapper,而且点的东西就是contentWrapper,或者点的东西在contentWrapper里面就return
         if (this.$refs.contentWrapper &&
           (this.$refs.contentWrapper === e.target ||
             this.$refs.contentWrapper.contains(e.target))
         ) { return }
         this.close()
       },
-      open (){
-        setTimeout(()=>{
-          this.visible = true
+      open () {
+        this.visible = true
+        this.$nextTick(() => {
           this.positionContent()
           document.addEventListener('click', this.onClickDocument)
         })
@@ -109,7 +94,6 @@
     position: absolute;
     border: 1px solid $border-color;
     border-radius: $border-radius;
-    /*box-shadow: 0 0 3px rgb(0,0,0, 0.5);*/
     filter: drop-shadow(0 1px 1px rgb(0,0,0, 0.5));
     background: white;
     padding: .5em 1em;
@@ -139,7 +123,6 @@
       }
     }
     &.position-bottom {
-
       margin-top: 10px;
       &::before, &::after {
         left: 10px;
