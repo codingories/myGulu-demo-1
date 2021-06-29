@@ -20,27 +20,29 @@ import TabsPane from './tabs-pane'
 import Popover from './popover'
 import Collapse from './collapse'
 import CollapseItem from './collapse-item'
+import Cascader from './cascader'
 
 Vue.component('g-button', Button)
-Vue.component('g-icon', Icon)
 Vue.component('g-button-group', ButtonGroup)
-Vue.component('g-input', Input)
-Vue.component('g-row', Row)
+Vue.component('g-cascader', Cascader)
 Vue.component('g-col', Col)
-Vue.component('g-layout', Layout)
-Vue.component('g-header', Header)
-Vue.component('g-content', Content)
-Vue.component('g-footer', Footer)
-Vue.component('g-sider', Sider)
-Vue.component('g-toast', Toast)
-Vue.component('g-tabs', Tabs)
-Vue.component('g-tabs-head', TabsHead)
-Vue.component('g-tabs-body', TabsBody)
-Vue.component('g-tabs-item', TabsItem)
-Vue.component('g-tabs-pane', TabsPane)
-Vue.component('g-popover', Popover)
 Vue.component('g-collapse', Collapse)
 Vue.component('g-collapse-item', CollapseItem)
+Vue.component('g-content', Content)
+Vue.component('g-footer', Footer)
+Vue.component('g-header', Header)
+Vue.component('g-icon', Icon)
+Vue.component('g-input', Input)
+Vue.component('g-layout', Layout)
+Vue.component('g-popover', Popover)
+Vue.component('g-row', Row)
+Vue.component('g-sider', Sider)
+Vue.component('g-tabs', Tabs)
+Vue.component('g-tabs-body', TabsBody)
+Vue.component('g-tabs-head', TabsHead)
+Vue.component('g-tabs-item', TabsItem)
+Vue.component('g-tabs-pane', TabsPane)
+Vue.component('g-toast', Toast)
 
 
 Vue.use(plugin)
@@ -48,7 +50,40 @@ Vue.use(plugin)
 new Vue({
   el: '#app',
   data: {
-    selectedTab: ['2','1']
+    source: [{
+      name: '浙江',
+      children: [
+        {
+          name: '杭州',
+          children: [
+            { name: '上城' },
+            { name: '下城' },
+            { name: '江干' },
+          ]
+        },
+        {name: '嘉兴',
+          children: [
+            { name: '南湖' },
+            { name: '秀洲' },
+            { name: '嘉善' },
+          ]
+        },
+      ],
+    }, {
+      name: '福建',
+      children: [
+        {name: '福州',
+          children: [
+            { name: '鼓楼' },
+            { name: '台山' },
+            { name: '仓山' },
+          ]},
+        {name: '厦门'},
+        {name: '莆田'},
+        {name: '三明'},
+        {name: '泉州'},
+      ],
+    }]
   },
   created(){
 
