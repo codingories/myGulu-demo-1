@@ -5,8 +5,8 @@
         {{item.name}}
       </div>
     </div>
-    <div class="right">
-
+    <div class="right" v-if="rightItems">
+      <gulu-cascader-items :items="rightItems"></gulu-cascader-items>
     </div>
   </div>
 </template>
@@ -36,7 +36,14 @@
 </script>
 <style lang='scss' scoped>
   .cascaderItem {
-    border: 1px solid red;
-    margin: 10px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    .left {
+      border: 1px solid red;
+    }
+    .right {
+      margin-top: -1px;
+    }
   }
 </style>

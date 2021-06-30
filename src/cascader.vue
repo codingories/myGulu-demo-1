@@ -53,7 +53,6 @@
     display: flex;
     border: 2px solid green;
     height: 200px;
-    width: 80px;
     .label {
       white-space: nowrap;
     }
