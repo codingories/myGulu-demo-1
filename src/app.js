@@ -83,7 +83,22 @@ new Vue({
         {name: '三明'},
         {name: '泉州'},
       ],
-    }]
+    },
+      {
+        name: '安徽',
+        children: [
+          {
+            name: '合肥',
+            children: [{
+              name: '瑶海'
+            },{
+              name: '庐阳'
+            }]
+          }
+        ]
+      }
+
+    ]
   },
   created(){
 

@@ -1,30 +1,62 @@
 <template>
-  <div class="cascader">
-    <div class="trigger">
-      <slot></slot>
+  <div class="cascader" >
+    <div class="trigger" @click="popoverVisible = !popoverVisible">
     </div>
-    <div class="popover">
-      <div v-for="item in source">
-        <cascader-Item :sourceItem="item"></cascader-Item>
-      </div>
+    <div class="popover" v-if="popoverVisible">
+       <cascader-items :items="source"></cascader-items>
     </div>
   </div>
 </template>
 <script>
-  import CascaderItem from './cascader-item'
+  import CascaderItems from './cascader-items'
   export default {
     name: 'GuluCascader',
-    components: {CascaderItem},
+    components: {CascaderItems},
     props: {
       source: {
         type: Array,
+      }
+    },
+    data() {
+      return {
+        popoverVisible: false,
+        level1Selected: null,
+        level2Selected: null
+      }
+    },
+    computed: {
+      level2Items(){
+        if(this.level1Selected) {
+          return this.level1Selected.children
+        } else {
+          return []
+        }
+      },
+      level3Items(){
+        if(this.level2Selected) {
+          return this.level2Selected.children
+        } else {
+          return []
+        }
       }
     }
 }
 </script>
 <style lang='scss' scoped>
   @import "var";
-  .cascader {
-
+  .trigger {
+    border: 1px solid red;
+    height: 32px;
+    width: 100px;
   }
+  .popover {
+    display: flex;
+    border: 2px solid green;
+    height: 200px;
+    width: 80px;
+    .label {
+      white-space: nowrap;
+    }
+  }
+
 </style>
