@@ -10,3 +10,11 @@ $font-size: 14px;
 $height: 32px;
 $input-height: 32px;
 $red: #F1453D;
+.box-shadow {
+  box-shadow: 0 0 5px rgba(0,0,0,0.15)
+}
+
+@mixin box-shadow2() {
+  box-shadow: 0 0 5px rgba(0,0,0,0.15);
+  border: 1px solid purple;
+}
