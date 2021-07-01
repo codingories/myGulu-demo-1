@@ -1,5 +1,6 @@
 $border-color-hover: #666;
 $border-color: #999;
+$border-color-light: lighten($border-color,20%);
 $border-radius: 4px;
 $box-shadow-color: rgba(0,0,0,0.5);
 $button-active-bg: #eee;
@@ -14,7 +15,3 @@ $red: #F1453D;
   box-shadow: 0 0 5px rgba(0,0,0,0.15)
 }
 
-@mixin box-shadow2() {
-  box-shadow: 0 0 5px rgba(0,0,0,0.15);
-  border: 1px solid purple;
-}

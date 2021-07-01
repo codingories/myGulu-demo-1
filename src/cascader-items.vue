@@ -51,7 +51,7 @@
       padding: .3em 0;
     }
     .right {
-      border-left: 1px solid $border-color;
+      border-left: 1px solid $border-color-light;
     }
     .label {
       padding: .3em 1em;
