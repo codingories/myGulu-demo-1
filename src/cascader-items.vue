@@ -62,5 +62,7 @@
         transform: scale(0.8)
       }
     }
+    .right {
+    }
   }
 </style>
