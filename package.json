@@ -4,49 +4,27 @@
   "description": "这是一个UI框架",
   "main": "dist/index.js",
   "scripts": {
-    "dev-test": "parcel watch test/* --no-cache & karma start",
-    "test": "parcel build test/* --no-cache --no-minify && karma start --single-run",
-    "build": "npx parcel build index.js --no-cache --no-minify",
-    "start": "parcel index.html --no-cache",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs"
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "test:unit": "vue-cli-service test:unit"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/codingories/myGulu-demo-1.git"
-  },
-  "keywords": [
-    "Vue",
-    "UI"
-  ],
-  "author": "Ories",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/codingories/myGulu-demo-1/issues"
-  },
-  "homepage": "https://github.com/codingories/myGulu-demo-1#readme",
   "dependencies": {
-    "vue": "^2.6.12"
+    "core-js": "^3.6.5",
+    "vue": "^2.6.11"
   },
   "devDependencies": {
-    "@vue/component-compiler-utils": "^3.2.0",
-    "chai": "^4.3.4",
-    "chai-spies": "^1.0.0",
-    "karma": "^6.3.2",
-    "karma-chai": "^0.1.0",
-    "karma-chai-spies": "^0.1.4",
-    "karma-chrome-launcher": "^3.1.0",
-    "karma-mocha": "^2.0.1",
-    "karma-sinon-chai": "^2.0.2",
-    "mocha": "^8.4.0",
-    "parcel-bundler": "^1.12.4",
-    "node-sass": "npm:dart-sass@^1.25.0",    "sass-loader": "^7.0.1",
-    "sinon": "^10.0.0",
-    "sinon-chai": "^3.6.0",
-    "vue-template-compiler": "^2.6.12",
-    "vuepress": "^0.13.1"
+    "@vue/cli-plugin-babel": "^4.5.0",
+    "@vue/cli-plugin-unit-mocha": "^4.5.0",
+    "@vue/cli-service": "^4.5.0",
+    "@vue/test-utils": "^1.0.3",
+    "chai": "^4.1.2",
+    "sass": "^1.26.5",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
   },
-  "alias": {
-    "vue": "./node_modules/vue/dist/vue.common.js"
-  }
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead"
+  ]
 }
