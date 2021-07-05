@@ -4,6 +4,7 @@
   "description": "这是一个UI框架",
   "main": "dist/index.js",
   "scripts": {
+    "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "test:unit": "vue-cli-service test:unit"
