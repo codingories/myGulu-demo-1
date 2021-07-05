@@ -1,8 +1,11 @@
 <template>
   <div>
-    <g-cascader :source="source"
-                @update:selected="selected = $event"
-                popover-height = "200px" :selected="selected"></g-cascader>
+    <div style="padding: 20px">
+      <g-cascader :source="source"
+                  @update:selected="selected = $event"
+                  popover-height = "200px" :selected="selected"></g-cascader>
+    </div>
+
   </div>
 </template>
 <script>
