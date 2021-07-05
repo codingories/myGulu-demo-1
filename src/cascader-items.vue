@@ -9,8 +9,8 @@
     <div class="right" v-if="rightItems">
       <gulu-cascader-items :items="rightItems"
                            :selected="selected"
-                           :level="level+1"
                            @update:selected="onUpdateSelected"
+                           :level="level+1"
                            :height="height"></gulu-cascader-items>
     </div>
   </div>

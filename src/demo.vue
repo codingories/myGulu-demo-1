@@ -2,8 +2,8 @@
   <div>
     <div style="padding: 20px">
       <g-cascader :source="source"
-                  @update:selected="selected = $event"
-                  popover-height = "200px" :selected="selected"></g-cascader>
+                  :selected.sync = 'selected'
+                  popover-height = "200px" ></g-cascader>
     </div>
 
   </div>
