@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>{{selected}}</p>
     <g-cascader :source="source"
                 @update:selected="selected = $event"
                 popover-height = "200px" :selected="selected"></g-cascader>
