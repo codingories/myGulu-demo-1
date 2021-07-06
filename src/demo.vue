@@ -3,7 +3,10 @@
     <div style="padding: 20px">
       <g-cascader :source="source"
                   :selected.sync = 'selected'
-                  popover-height = "200px" ></g-cascader>
+                  popover-height = "200px"
+                  @update:selected="xxx"
+                  :load-data="loadData"
+      ></g-cascader>
     </div>
 
   </div>
@@ -12,11 +15,25 @@
   import Cascader from './cascader'
   import db from './db'
 
-  function ajax ( parent_id = 0 ) {
-    return db.filter((item) => item.parent_id === parent_id)
+  // 返回一个timeId
+  // function ajax1 ( parent_id = 0 , success, fail) {
+  //   let id = setTimeout(() => {
+  //     let result = db.filter((item) => item.parent_id === parent_id)
+  //     success(result)
+  //   }, 3000)
+  //   return id
+  // }
+
+  // 返回一个promise
+  function ajax2 ( parent_id = 0 ) {
+    return new Promise((success, fail) => {
+      setTimeout(()=>{
+        let result = db.filter((item) => item.parent_id === parent_id)
+        success(result)
+      },2000)
+    })
   }
 
-  console.log(ajax())
 
   export default {
     name: '',
@@ -27,7 +44,35 @@
       return {
         // ['浙江', '杭州']
         selected: [],
-        source: ajax()
+        source: []
+      }
+    },
+    created () {
+      // ajax1(0, (result) => {
+      //   this.source = result
+      // })
+      ajax2(0).then((result)=> {
+        this.source = result
+      })
+      // ajax2(1).then((result)=> {
+      //   this.source = result
+      // })
+    },
+
+    methods: {
+      loadData({id} ,updateSource){
+        ajax2(id).then(result => {
+          updateSource(result) // 回调: 把别人传的函数调用一下
+        })
+      },
+      xxx() {
+        const id = this.selected[0].id
+        ajax2(id).then((result)=>{
+          let lastLevelSelected = this.source.filter(item => item.id===id)[0]
+          // lastLevelSelected.children = result
+          this.$set(lastLevelSelected, 'children', result)
+          // this.$set(lastLevelSelected, 'children', result)
+        })
       }
     }
 }

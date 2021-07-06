@@ -27,6 +27,9 @@
         default: () => {
           return []
         }
+      },
+      loadData: {
+        type: Function
       }
     },
     data() {
@@ -37,6 +40,18 @@
     methods: {
       onUpdateSelected(newSelected){
         this.$emit('update:selected', newSelected)
+        let lastItem = newSelected[newSelected.length - 1]
+
+        console.log(lastItem)
+        console.log(this.source)
+
+        let updateSouce = (result) => {
+          let toUpdate = this.source.filter(item=>item.id === lastItem.id)[0]
+          this.$set(toUpdate, 'children', result)
+        }
+
+        this.loadData(lastItem, updateSouce) // 回调: 把别人传的函数调用一下
+        // 调回调的时候再传入一个回调函数，函数理论上应该被调用
       }
     },
     computed: {
