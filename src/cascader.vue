@@ -42,12 +42,48 @@
         this.$emit('update:selected', newSelected)
         let lastItem = newSelected[newSelected.length - 1]
 
-        console.log(lastItem)
-        console.log(this.source)
+        let simplest = (children, id) => {
+          return children.filter(item => item.id === id)[0]
+        }
+
+        let complex = (children, id) => {
+          let noChildren = []
+          let hasChildren = []
+          children.forEach(item => {
+            if (item.children) {
+              hasChildren.push(item)
+            } else {
+              noChildren.push(item)
+            }
+          })
+          let found = simplest(noChildren, id)
+          if (found) {
+            console.log('found')
+            console.log(found)
+            return found
+          } else {
+            found = simplest(hasChildren, id)
+            if (found) {return found}
+            else {
+              for (let i=0; i<hasChildren.length; i++) {
+                found = complex( hasChildren[i].children, id)
+                if(found) {
+                  return found
+                }
+              }
+              return undefined
+            }
+          }
+        }
 
         let updateSouce = (result) => {
-          let toUpdate = this.source.filter(item=>item.id === lastItem.id)[0]
-          this.$set(toUpdate, 'children', result)
+          // copy就是最新的source
+          let copy = JSON.parse(JSON.stringify(this.source))
+          // 把children 挂到source
+          let toUpdate = complex(copy, lastItem.id)
+          // this.$set(toUpdate, 'children', result)
+          toUpdate.children = result
+          this.$emit('update:source', copy)
         }
 
         this.loadData(lastItem, updateSouce) // 回调: 把别人传的函数调用一下

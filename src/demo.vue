@@ -1,12 +1,18 @@
 <template>
   <div>
+    <p>{{selected && selected[0] && selected[0].name || '空'}}</p>
+    <p>{{selected && selected[1] && selected[1].name || '空'}}</p>
+    <p>{{selected && selected[2] && selected[2].name || '空'}}</p>
+
     <div style="padding: 20px">
-      <g-cascader :source="source"
+      <g-cascader :source.sync="source"
                   :selected.sync = 'selected'
                   popover-height = "200px"
-                  @update:selected="xxx"
                   :load-data="loadData"
       ></g-cascader>
+<!--      @update:selected="xxx"-->
+
+      {{source}}
     </div>
 
   </div>
@@ -30,7 +36,7 @@
       setTimeout(()=>{
         let result = db.filter((item) => item.parent_id === parent_id)
         success(result)
-      },2000)
+      },300)
     })
   }
 
@@ -65,15 +71,15 @@
           updateSource(result) // 回调: 把别人传的函数调用一下
         })
       },
-      xxx() {
-        const id = this.selected[0].id
-        ajax2(id).then((result)=>{
-          let lastLevelSelected = this.source.filter(item => item.id===id)[0]
-          // lastLevelSelected.children = result
-          this.$set(lastLevelSelected, 'children', result)
-          // this.$set(lastLevelSelected, 'children', result)
-        })
-      }
+      // xxx() {
+      //   const id = this.selected[0].id
+      //   ajax2(id).then((result)=>{
+      //     let lastLevelSelected = this.source.filter(item => item.id===id)[0]
+      //     // lastLevelSelected.children = result
+      //     this.$set(lastLevelSelected, 'children', result)
+      //     // this.$set(lastLevelSelected, 'children', result)
+      //   })
+      // }
     }
 }
 </script>

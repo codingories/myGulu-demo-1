@@ -43,11 +43,14 @@
      },
      computed: {
         rightItems(){
-          let currentSelect = this.selected[this.level]
-          if (currentSelect && currentSelect.children) {
-            return currentSelect.children
-          } else {
-            return null
+          console.log('计算属性')
+          console.log('this.selected', this.selected)
+
+          if ( this.selected[this.level] ) {
+            let selected = this.items.filter((item) => item.name === this.selected[this.level].name)
+            if ( selected && selected[0].children && selected[0].children.length > 0) {
+              return selected[0].children
+            }
           }
         }
      },
