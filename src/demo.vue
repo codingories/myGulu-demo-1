@@ -35,6 +35,13 @@
     return new Promise((success, fail) => {
       setTimeout(()=>{
         let result = db.filter((item) => item.parent_id === parent_id)
+        result.forEach(node=>{
+          if(db.filter(item => item.parent_id === node.id).length > 0) {
+            node.isLeaf = false
+          } else {
+            node.isLeaf = true
+          }
+        })
         success(result)
       },300)
     })
@@ -57,12 +64,14 @@
       // ajax1(0, (result) => {
       //   this.source = result
       // })
-      ajax2(0).then((result)=> {
-        this.source = result
-      })
-      // ajax2(1).then((result)=> {
+
+      // ajax2(0).then((result)=> {
+      //   console.log('fuck f result', result)
       //   this.source = result
       // })
+
+      this.source = db
+
     },
 
     methods: {

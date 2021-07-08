@@ -2,8 +2,10 @@
   <div class="cascaderItem" :style="{height: height}">
     <div class="left">
       <div class="label" v-for="(item, index) in items" @click="onClickLabel(item)" :key="index">
-        {{item.name}}
-        <icon class="icon" v-if="item.children" name="right"></icon>
+        <span class="name">
+          {{item.name}}
+        </span>
+        <icon class="icon" v-if="!item.isLeaf" name="right"></icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
@@ -43,9 +45,6 @@
      },
      computed: {
         rightItems(){
-          console.log('计算属性')
-          console.log('this.selected', this.selected)
-
           if ( this.selected[this.level] ) {
             let selected = this.items.filter((item) => item.name === this.selected[this.level].name)
             if ( selected && selected[0].children && selected[0].children.length > 0) {
@@ -83,11 +82,19 @@
       border-left: 1px solid $border-color-light;
     }
     .label {
-      padding: .3em 1em;
+      padding: .5em 1em;
       display: flex;
       align-items: center;
+      cursor: pointer;
+      &:hover {
+        background-color: $grey;
+      }
+      > .name {
+        margin-right: 1em;
+        user-select: none;
+      }
       .icon {
-        margin-left: 1em;
+        margin-left: auto;
         transform: scale(0.8)
       }
     }

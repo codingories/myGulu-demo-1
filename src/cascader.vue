@@ -58,8 +58,6 @@
           })
           let found = simplest(noChildren, id)
           if (found) {
-            console.log('found')
-            console.log(found)
             return found
           } else {
             found = simplest(hasChildren, id)
@@ -86,8 +84,12 @@
           this.$emit('update:source', copy)
         }
 
-        this.loadData(lastItem, updateSouce) // 回调: 把别人传的函数调用一下
-        // 调回调的时候再传入一个回调函数，函数理论上应该被调用
+        // 不是叶子才去加载数据
+        if (!lastItem.isLeaf) {
+          this.loadData(lastItem, updateSouce) // 回调: 把别人传的函数调用一下
+          // 调回调的时候再传入一个回调函数，函数理论上应该被调用
+        }
+
       }
     },
     computed: {
