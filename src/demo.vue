@@ -65,12 +65,12 @@
       //   this.source = result
       // })
 
-      // ajax2(0).then((result)=> {
-      //   console.log('fuck f result', result)
-      //   this.source = result
-      // })
+      ajax2(0).then((result)=> {
+        console.log('fuck f result', result)
+        this.source = result
+      })
 
-      this.source = db
+      // this.source = db
 
     },
 

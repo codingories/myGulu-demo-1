@@ -5,7 +5,7 @@
         <span class="name">
           {{item.name}}
         </span>
-        <icon class="icon" v-if="!item.isLeaf" name="right"></icon>
+        <icon class="icon" v-if="rightArrowVisible(item)" name="right"></icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
@@ -35,6 +35,9 @@
           return []
         }
       },
+      loadData: {
+        type: Function
+      },
       level: {
         type: Number,
         default: 0
@@ -51,9 +54,12 @@
               return selected[0].children
             }
           }
-        }
+        },
      },
      methods: {
+       rightArrowVisible(item){
+         return this.loadData ? !item.isLeaf : item.children
+       },
       onClickLabel(item){
         let copy = JSON.parse(JSON.stringify(this.selected))
         copy[this.level] = item

@@ -5,6 +5,7 @@
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
        <cascader-items :items="source" class="popover" :selected = "selected"
+                       :loadData="loadData"
                        @update:selected="onUpdateSelected"
                       :height="popoverHeight"></cascader-items>
     </div>
@@ -86,7 +87,7 @@
 
         // 不是叶子才去加载数据
         if (!lastItem.isLeaf) {
-          this.loadData(lastItem, updateSouce) // 回调: 把别人传的函数调用一下
+          this.loadData && this.loadData(lastItem, updateSouce) // 回调: 把别人传的函数调用一下
           // 调回调的时候再传入一个回调函数，函数理论上应该被调用
         }
 
