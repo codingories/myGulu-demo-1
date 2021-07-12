@@ -1,5 +1,5 @@
 <template>
-  <div class="cascader" ref="cascader">
+  <div class="cascader" ref="cascader" v-click-outside="close">
     <div class="trigger" @click="toggle">
       {{result || '&nbsp'}}
     </div>
@@ -13,9 +13,11 @@
 </template>
 <script>
   import CascaderItems from './cascader-items'
+  import ClickOutside from './click-outside'
   export default {
     name: 'GuluCascader',
     components: {CascaderItems},
+    directives: {ClickOutside},
     props: {
       source: {
         type: Array,
@@ -39,30 +41,13 @@
       }
     },
     methods: {
-      onClickDocument (e) {
-        // console.log(this)
-        // console.log('x')
-        console.log('e.target', e.target)
-        console.log('click document')
-
-        let { cascader } = this.$refs
-        let { target } =  e
-        if(cascader === target || cascader.contains(target)) {
-          return
-        }
-        this.close()
-
-      },
       open(){
+        console.log('open')
         this.popoverVisible = true
-        this.$nextTick(()=>{
-          document.addEventListener('click', this.onClickDocument)
-        })
       },
       close(){
         console.log('close')
         this.popoverVisible = false
-        document.removeEventListener('click', this.onClickDocument)
       },
       toggle(){
         if(this.popoverVisible === true) {
@@ -122,7 +107,6 @@
           this.loadData && this.loadData(lastItem, updateSouce) // 回调: 把别人传的函数调用一下
           // 调回调的时候再传入一个回调函数，函数理论上应该被调用
         }
-
       }
     },
     computed: {

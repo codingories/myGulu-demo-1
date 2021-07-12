@@ -8,6 +8,15 @@
                   popover-height = "200px"
                   :load-data="loadData"
       ></g-cascader>
+
+    </div>
+    <div style="padding: 20px">
+      <g-cascader :source.sync="source"
+                  :selected.sync = 'selected'
+                  popover-height = "200px"
+                  :load-data="loadData"
+      ></g-cascader>
+
     </div>
     <g-popover>
       <template>
@@ -25,7 +34,7 @@
   import Cascader from './cascader'
   import db from './db'
   import Popover from './popover'
-
+  import {removeListener} from './click-outside'
   // 返回一个promise
   function ajax2 ( parent_id = 0 ) {
     return new Promise((success, fail) => {
@@ -61,6 +70,9 @@
         console.log('fuck f result', result)
         this.source = result
       })
+    },
+    destroyed(){
+      removeListener()
     },
 
     methods: {
