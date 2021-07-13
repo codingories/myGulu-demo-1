@@ -1,7 +1,5 @@
 <template>
   <div>
-
-
     <div style="padding: 20px">
       <g-cascader :source.sync="source"
                   :selected.sync = 'selected'
@@ -10,14 +8,14 @@
       ></g-cascader>
 
     </div>
-    <div style="padding: 20px">
-      <g-cascader :source.sync="source"
-                  :selected.sync = 'selected'
-                  popover-height = "200px"
-                  :load-data="loadData"
-      ></g-cascader>
+<!--    <div style="padding: 20px">-->
+<!--      <g-cascader :source.sync="source"-->
+<!--                  :selected.sync = 'selected'-->
+<!--                  popover-height = "200px"-->
+<!--                  :load-data="loadData"-->
+<!--      ></g-cascader>-->
 
-    </div>
+<!--    </div>-->
     <g-popover>
       <template>
         <button>点我</button>
@@ -48,7 +46,7 @@
           }
         })
         success(result)
-      },300)
+      },1000)
     })
   }
 

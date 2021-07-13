@@ -5,6 +5,7 @@
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
        <cascader-items :items="source" class="popover" :selected = "selected"
+                       :loadingItem="loadingItem"
                        :loadData="loadData"
                        @update:selected="onUpdateSelected"
                       :height="popoverHeight"></cascader-items>
@@ -32,12 +33,13 @@
         }
       },
       loadData: {
-        type: Function
+        type: Function,
       }
     },
     data() {
       return {
         popoverVisible: false,
+        loadingItem: {}
       }
     },
     methods: {
@@ -93,6 +95,7 @@
         }
 
         let updateSouce = (result) => {
+          this.loadingItem = {}
           // copy就是最新的source
           let copy = JSON.parse(JSON.stringify(this.source))
           // 把children 挂到source
@@ -103,9 +106,10 @@
         }
 
         // 不是叶子才去加载数据
-        if (!lastItem.isLeaf) {
-          this.loadData && this.loadData(lastItem, updateSouce) // 回调: 把别人传的函数调用一下
+        if (!lastItem.isLeaf && this.loadData) {
+          this.loadData(lastItem, updateSouce) // 回调: 把别人传的函数调用一下
           // 调回调的时候再传入一个回调函数，函数理论上应该被调用
+          this.loadingItem = lastItem
         }
       }
     },
@@ -123,6 +127,7 @@
     position: relative;
     border: 1px soli d red;
     .trigger {
+      /*background-color: white;*/
       height: $input-height;
       display: inline-flex;
       align-items: center;
@@ -139,6 +144,7 @@
       display: flex;
       @extend .box-shadow;
       margin-top: 8px;
+      z-index: 1;
     }
   }
 </style>
