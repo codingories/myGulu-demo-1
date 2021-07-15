@@ -7,6 +7,7 @@
                   :load-data="loadData"
       ></g-cascader>
 
+
     </div>
 <!--    <div style="padding: 20px">-->
 <!--      <g-cascader :source.sync="source"-->
@@ -16,7 +17,7 @@
 <!--      ></g-cascader>-->
 
 <!--    </div>-->
-    <g-popover>
+    <g-popover trigger="hover">
       <template>
         <button>点我</button>
       </template>
@@ -29,6 +30,7 @@
   </div>
 </template>
 <script>
+
   import Cascader from './cascader'
   import db from './db'
   import Popover from './popover'

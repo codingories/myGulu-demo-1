@@ -1,5 +1,6 @@
 <template>
   <div class="popover"  ref="popover">
+    {{trigger}}
     <div ref="contentWrapper" class="content-wrapper"  v-show="visible"
       :class="{[`position-${position}`] : true}">
       <slot name="content"></slot>
@@ -61,6 +62,7 @@
         type: String,
         default: 'click',
         validator(value) {
+          console.log('fuck 3', value)
           return ['click', 'hover'].indexOf(value) >= 0
         }
       }
@@ -92,6 +94,7 @@
         this.close()
       },
       open () {
+        console.log('xxx')
         this.visible = true
         this.$nextTick(() => {
           this.positionContent()
