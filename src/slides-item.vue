@@ -34,8 +34,6 @@
     position: absolute;
     left: 0;
     top: 0;
-    background: red !important;
-    border: 10px solid red;
   }
   .slide-enter-active, .slide-leave-active {
     transition: all 1s;

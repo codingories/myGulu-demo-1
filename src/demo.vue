@@ -1,13 +1,13 @@
 <template>
   <div>
-    <g-slides  :selected="selected">
-      <g-slides-item name="1">
+    <g-slides  :selected.sync="selected">
+      <g-slides-item name="你好">
          <div class="box">1</div>
       </g-slides-item>
-      <g-slides-item name="2">
+      <g-slides-item name="hello">
         <div class="box">2</div>
       </g-slides-item>
-      <g-slides-item name="3">
+      <g-slides-item name="world">
         <div class="box">3</div>
       </g-slides-item>
     </g-slides>
