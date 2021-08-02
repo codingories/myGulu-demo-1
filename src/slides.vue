@@ -52,9 +52,7 @@
           vm.selected = selected
           const names = this.$children.map(vm => vm.name)
           let newIndex = names.indexOf(selected)
-          console.log(`newIndex`, newIndex)
           let oldIndex = names.indexOf(vm.name)
-          console.log(`oldIndex`, oldIndex)
           vm.reverse = newIndex > oldIndex ? false : true
         })
       },
@@ -68,7 +66,7 @@
 </script>
 <style lang='scss' scoped>
 .g-slides {
-  display: inline-block;
+  //display: inline-block;
   border: 1px solid black;
   &-window {
     overflow: hidden !important;

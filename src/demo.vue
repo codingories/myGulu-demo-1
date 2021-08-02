@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="wrapper">
     <g-slides  :selected.sync="selected">
       <g-slides-item name="你好">
          <div class="box">1</div>
@@ -44,9 +44,12 @@
 </script>
 <style>
 * {margin: 0; padding: 0; box-sizing: border-box;}
+.wrapper {
+  margin: 40px;
+}
 .box {
-  widtH: 200px;
-  height: 150px;
+  width: 100%;
+  height: 300px;
   background-color: #ddd;
   border: 1px solid red;
 }

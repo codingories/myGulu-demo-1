@@ -32,6 +32,7 @@
     position: absolute;
     left: 0;
     top: 0;
+    width: 100%;
   }
   .slide-enter-active, .slide-leave-active {
     transition: all 1s;
