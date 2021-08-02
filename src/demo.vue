@@ -26,7 +26,7 @@
     },
     data(){
       return {
-        selected: undefined
+        selected: 'world'
       }
     },
 
@@ -40,10 +40,6 @@
         n ++
       }, 3000)
     },
-
-    methods: {
-
-    }
 }
 </script>
 <style>
