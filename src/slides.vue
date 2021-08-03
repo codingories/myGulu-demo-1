@@ -9,7 +9,7 @@
       <span v-for="n in childrenLength" :class="{active: selectedIndex === n-1}"
       @click="select(n-1)"
       >
-        {{ n }}
+        {{ n - 1 }}
       </span>
     </div>
   </div>
@@ -36,7 +36,6 @@
       this.updateChildren()
       this.playAutomatically()
       this.childrenLength = this.$children.length
-      this.lastSelectedIndex = this.selectedIndex
     },
     updated () {
       console.log('fuck this.lastSelectedIndex 1111', this.lastSelectedIndex)
@@ -71,6 +70,7 @@
         // 老手a不用setInterval,如果忘记clear就会一直运行，用setTimeout模拟setInterval好处就是自动停止
       },
       select(index){
+        this.lastSelectedIndex = this.selectedIndex
         this.$emit('update:selected', this.names[index])
       },
       getSelected() {
@@ -79,13 +79,11 @@
       },
       updateChildren() {
         let selected = this.getSelected()
-        // let first = this.$children[0]
         this.$children.forEach((vm)=>{
-          vm.selected = selected
-          let newIndex = this.names.indexOf(selected)
-          let oldIndex = this.names.indexOf(vm.name)
-          vm.reverse = newIndex > oldIndex ? false : true
-          console.log('vm.reverse', vm.reverse)
+          vm.reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
+          this.$nextTick(() => {
+            vm.selected = selected
+          })
         })
       },
     },

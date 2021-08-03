@@ -1,13 +1,13 @@
 <template>
   <div class="wrapper">
     <g-slides  :selected.sync="selected">
-      <g-slides-item name="你好">
+      <g-slides-item name="11">
          <div class="box">1</div>
       </g-slides-item>
-      <g-slides-item name="hello">
+      <g-slides-item name="22">
         <div class="box">2</div>
       </g-slides-item>
-      <g-slides-item name="world">
+      <g-slides-item name="33">
         <div class="box">3</div>
       </g-slides-item>
     </g-slides>
@@ -26,7 +26,7 @@
     },
     data(){
       return {
-        selected: 'world'
+        selected: '33'
       }
     },
 
