@@ -7,7 +7,7 @@
     </div>
     <div class="g-slides-dots">
       <span v-for="n in childrenLength" :class="{active: selectedIndex === n-1}"
-      @click="selected1(n-1)"
+      @click="select(n-1)"
       >
         {{ n }}
       </span>
@@ -27,7 +27,8 @@
     },
     data() {
       return {
-        childrenLength: 0
+        childrenLength: 0,
+        lastSelectedIndex: undefined
       }
     },
     mounted() {
@@ -35,8 +36,11 @@
       this.updateChildren()
       this.playAutomatically()
       this.childrenLength = this.$children.length
+      this.lastSelectedIndex = this.selectedIndex
     },
     updated () {
+      console.log('fuck this.lastSelectedIndex 1111', this.lastSelectedIndex)
+      console.log('fuck this.lastSelectedIndex 2222', this.selectedIndex)
       this.updateChildren()
     },
     computed: {
@@ -59,13 +63,14 @@
           if ( newIndex === -1 ) {newIndex = this.names.length - 1}
           if ( newIndex === this.names.length ) { newIndex = 0 }
           console.log(`this.names[newIndex]`, this.names[newIndex])
-          this.$emit('update:selected', this.names[newIndex])
+          // this.$emit('update:selected', this.names[newIndex])
+          this.select(newIndex)
           setTimeout(run, 3000)
         }
         // setTimeout(run, 3000)
         // 老手a不用setInterval,如果忘记clear就会一直运行，用setTimeout模拟setInterval好处就是自动停止
       },
-      selected1(index){
+      select(index){
         this.$emit('update:selected', this.names[index])
       },
       getSelected() {
@@ -80,6 +85,7 @@
           let newIndex = this.names.indexOf(selected)
           let oldIndex = this.names.indexOf(vm.name)
           vm.reverse = newIndex > oldIndex ? false : true
+          console.log('vm.reverse', vm.reverse)
         })
       },
     },
