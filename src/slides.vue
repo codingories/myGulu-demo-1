@@ -5,6 +5,13 @@
         <slot></slot>
       </div>
     </div>
+    <div class="g-slides-dots">
+      <span v-for="n in childrenLength" :class="{active: selectedIndex === n-1}"
+      @click="selected1(n-1)"
+      >
+        {{ n }}
+      </span>
+    </div>
   </div>
 </template>
 <script>
@@ -18,28 +25,48 @@
         default: true
       }
     },
+    data() {
+      return {
+        childrenLength: 0
+      }
+    },
     mounted() {
       // 显示第一个
       this.updateChildren()
       this.playAutomatically()
+      this.childrenLength = this.$children.length
     },
     updated () {
       this.updateChildren()
     },
+    computed: {
+      selectedIndex() {
+        return this.names.indexOf(this.selected) || 0
+      },
+      names() {
+        return this.$children.map(vm => vm.name)
+      }
+    },
     methods: {
       playAutomatically() {
+        let index = this.names.indexOf(this.getSelected())
         // 周期性的说selected要变
-        const names = this.$children.map(vm => vm.name)
-        let index = names.indexOf(this.getSelected())
+        console.log(`index fuck1`, index)
         let run = () => {
           let newIndex = index - 1
-          if ( newIndex === -1 ) {index = names.length - 1}
-          if ( newIndex === names.length ) { newIndex = 0 }
-          this.$emit('update:selected', names[newIndex])
+          // index = newIndex
+          console.log('newIndex2', newIndex)
+          if ( newIndex === -1 ) {newIndex = this.names.length - 1}
+          if ( newIndex === this.names.length ) { newIndex = 0 }
+          console.log(`this.names[newIndex]`, this.names[newIndex])
+          this.$emit('update:selected', this.names[newIndex])
           setTimeout(run, 3000)
         }
-        setTimeout(run, 3000)
-        // 老手不用setInterval,如果忘记clear就会一直运行，用setTimeout模拟setInterval好处就是自动停止
+        // setTimeout(run, 3000)
+        // 老手a不用setInterval,如果忘记clear就会一直运行，用setTimeout模拟setInterval好处就是自动停止
+      },
+      selected1(index){
+        this.$emit('update:selected', this.names[index])
       },
       getSelected() {
         let first = this.$children[0]
@@ -47,21 +74,15 @@
       },
       updateChildren() {
         let selected = this.getSelected()
-        let first = this.$children[0]
+        // let first = this.$children[0]
         this.$children.forEach((vm)=>{
           vm.selected = selected
-          const names = this.$children.map(vm => vm.name)
-          let newIndex = names.indexOf(selected)
-          let oldIndex = names.indexOf(vm.name)
+          let newIndex = this.names.indexOf(selected)
+          let oldIndex = this.names.indexOf(vm.name)
           vm.reverse = newIndex > oldIndex ? false : true
         })
       },
     },
-    data(){
-      return {
-
-      }
-    }
 }
 </script>
 <style lang='scss' scoped>
@@ -73,6 +94,13 @@
   }
   &-wrapper {
     position: relative;
+  }
+  &-dots {
+    > span {
+      &.active {
+        background-color: red;
+      }
+    }
   }
 }
 </style>

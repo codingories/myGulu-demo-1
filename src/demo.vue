@@ -31,14 +31,14 @@
     },
 
     created() {
-      let n = 1
-      setInterval(() => {
-        if(n === 4) {
-          n = 1
-        }
-        this.selected = n.toString()
-        n ++
-      }, 3000)
+      // let n = 1
+      // setInterval(() => {
+      //   if(n === 4) {
+      //     n = 1
+      //   }
+      //   this.selected = n.toString()
+      //   n ++
+      // }, 3000)
     },
 }
 </script>
