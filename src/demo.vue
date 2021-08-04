@@ -24,7 +24,7 @@
     },
     data(){
       return {
-        selected: '33'
+        selected: undefined
       }
     },
 
