@@ -17,8 +17,6 @@
   import GSlides from './slides'
   import GSlidesItem from './slides-item'
 
-
-
   export default {
     name: '',
     components: {
@@ -30,16 +28,7 @@
       }
     },
 
-    created() {
-      // let n = 1
-      // setInterval(() => {
-      //   if(n === 4) {
-      //     n = 1
-      //   }
-      //   this.selected = n.toString()
-      //   n ++
-      // }, 3000)
-    },
+    created() {},
 }
 </script>
 <style>
@@ -51,6 +40,9 @@
   width: 100%;
   height: 300px;
   background-color: #ddd;
-  border: 1px solid red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
 }
 </style>
