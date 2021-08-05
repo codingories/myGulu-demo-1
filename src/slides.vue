@@ -1,5 +1,10 @@
 <template>
-  <div class="g-slides" @mouseenter="onMouseEnter" @mouseleave="onmouseleave">
+  <div class="g-slides" @mouseenter="onMouseEnter"
+       @mouseleave="onmouseleave"
+       @touchstart="onTouchStart"
+       @touchmove="onTouchMove"
+       @touchend="onTouchEnd"
+  >
     <div class="g-slides-window" ref="window">
       <div class="g-slides-wrapper">
         <slot></slot>
@@ -29,7 +34,8 @@
       return {
         childrenLength: 0,
         lastSelectedIndex: undefined,
-        timeId: undefined
+        timeId: undefined,
+        startTouch: undefined,
       }
     },
     mounted() {
@@ -43,7 +49,8 @@
     },
     computed: {
       selectedIndex() {
-        return this.names.indexOf(this.selected) || 0
+        let index = this.names.indexOf(this.selected)
+        return index === -1 ? 0 : index
       },
       names() {
         return this.$children.map(vm => vm.name)
@@ -51,20 +58,60 @@
     },
     methods: {
       onMouseEnter() {
-        this.pause()
         this.timerId = undefined
       },
       onmouseleave() {
         this.playAutomatically()
       },
+      onTouchStart(e) {
+        this.pause()
+        if (e.touches.length > 1) {return}
+        this.startTouch = e.touches[0]
+        // console.log(e.touches[0])
+        // console.log('摸')
+      },
+      onTouchMove() {
+        console.log('边摸边动')
+      },
+      onTouchEnd(e) {
+        // console.log(e.touches[0])
+        let endTouch = e.changedTouches[0]
+        let {clientX:x1, clientY:y1} = this.startTouch
+        let {clientX:x2, clientY:y2} = endTouch
+
+
+        let distance = Math.sqrt(Math.pow(x2-x1,2)) + Math.sqrt(Math.pow(y2-y1,2))
+        console.log('distance')
+        console.log(distance)
+        let deltaY = Math.abs(y2 - y1)
+
+        let rate = distance / deltaY
+        console.log('rate')
+        console.log(rate)
+
+        if(rate>2) {
+          console.log('在滑动我')
+          if(x2 > x1) {
+            this.select(this.selectedIndex - 1)
+          } else {
+            this.select(this.selectedIndex + 1)
+          }
+        }
+        this.$nextTick(()=> {
+          this.playAutomatically()
+        })
+        console.log('摸完了')
+      },
       playAutomatically() {
         // 周期性的说selected要变
-        if (this.timerId)  { return }
+        console.log('this.timerIdthis.timerId',this.timerId)
+        if (this.timerId)  {
+          console.log('1111111111')
+          return
+        }
         let run = () => {
           let index = this.names.indexOf(this.getSelected())
           let newIndex = index + 1
-          if ( newIndex === -1 ) {newIndex = this.names.length - 1}
-          if ( newIndex === this.names.length ) { newIndex = 0 }
           this.select(newIndex) // 告诉外界选中 newIndex
           this.timerId = setTimeout(run, 3000)
         }
@@ -72,10 +119,13 @@
       },
       pause () {
         window.clearTimeout(this.timerId)
+        this.timerId = undefined
       },
-      select(index){
+      select(newIndex){
         this.lastSelectedIndex = this.selectedIndex
-        this.$emit('update:selected', this.names[index])
+        if ( newIndex === -1 ) {newIndex = this.names.length - 1}
+        if ( newIndex === this.names.length ) { newIndex = 0 }
+        this.$emit('update:selected', this.names[newIndex])
       },
       getSelected() {
         let first = this.$children[0]
