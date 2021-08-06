@@ -11,16 +11,24 @@
       </div>
     </div>
     <div class="g-slides-dots">
+      <span @click="onClickPrev">
+        <g-icon name="left"></g-icon>
+      </span>
       <span v-for="n in childrenLength" :class="{active: selectedIndex === n-1}"
       @click="select(n-1)"
       >
         {{ n }}
       </span>
+      <span @click="onClickNext">
+        <g-icon name="right"></g-icon>
+      </span>
     </div>
   </div>
 </template>
 <script>
+import GIcon from './icon'
   export default {
+  components: {GIcon},
     props: {
       selected: {
         type: String,
@@ -40,9 +48,10 @@
     },
     mounted() {
       // 显示第一个
+      this.childrenLength = this.items.length
+      console.log(`this.items.length`, this.items.length)
       this.updateChildren()
-      this.playAutomatically()
-      this.childrenLength = this.$children.length
+      // this.playAutomatically()
     },
     updated () {
       this.updateChildren()
@@ -53,10 +62,22 @@
         return index === -1 ? 0 : index
       },
       names() {
-        return this.$children.map(vm => vm.name)
+        return this.items.map(vm => vm.name)
+      },
+      items() {
+        // console.log(`this.$children.filter(vm => vm.$options.name === 'GuluSlidesItem').length`, this.$children.filter(vm => vm.$options.name === 'GuluSlidesItem').length)
+        return this.$children.filter(vm => vm.$options.name === 'GuluSlidesItem')
       }
     },
     methods: {
+      onClickPrev() {
+        this.select(this.selectedIndex - 1)
+        console.log('Prev')
+      },
+      onClickNext() {
+        this.select(this.selectedIndex + 1)
+        console.log('Next')
+      },
       onMouseEnter() {
         this.timerId = undefined
       },
@@ -128,18 +149,21 @@
         this.$emit('update:selected', this.names[newIndex])
       },
       getSelected() {
-        let first = this.$children[0]
+        let first = this.items[0] ? this.items[0] : []
+        console.log('first', first)
+        console.log('111')
         return this.selected || first.name
+        // return []
       },
       updateChildren() {
         let selected = this.getSelected()
-        this.$children.forEach((vm)=>{
+        this.items.forEach((vm)=>{
           let reverse = this.selectedIndex > this.lastSelectedIndex ? false : true
           if (this.timerId) {
-            if (this.lastSelectedIndex === this.$children.length - 1 && this.selectedIndex === 0) {
+            if (this.lastSelectedIndex === this.items.length - 1 && this.selectedIndex === 0) {
               reverse = false
             }
-            if (this.lastSelectedIndex === 0 && this.selectedIndex === this.$children.length - 1) {
+            if (this.lastSelectedIndex === 0 && this.selectedIndex === this.items.length - 1) {
               reverse = true
             }
           }
