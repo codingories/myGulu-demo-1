@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import Button from '../../../src/button.vue'
+  import Button from '@/button/button.vue'
 
   export default {
     data() {
