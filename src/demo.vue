@@ -1,52 +1,29 @@
 <template>
-  <div class="wrapper">
-    <GButton>你好</GButton>
-    <g-slides  :selected.sync="selected">
-      <g-slides-item name="11">
-         <div class="box">1</div>
-      </g-slides-item>
-      <g-slides-item name="22">
-        <div class="box">2</div>
-      </g-slides-item>
-      <g-slides-item name="33">
-        <div class="box">3</div>
-      </g-slides-item>
-    </g-slides>
-
+  <div>
+    <g-nav :selected.sync="selected" :multiple="false">
+      <g-nav-item name="home">首页</g-nav-item>
+      <g-nav-item name="about">关于</g-nav-item>
+      <g-nav-item name="hire">招聘</g-nav-item>
+    </g-nav>
   </div>
 </template>
 <script>
-  import GSlides from './slides/slides'
-  import GSlidesItem from './slides/slides-item'
-  import GButton from './button/button'
-
+  import GNav from './nav/nav.vue';
+  import GNavItem from './nav/nav-item.vue';
+  import GSubNav from './nav/sub-nav.vue';
 
   export default {
     name: '',
     components: {
-      GSlides, GSlidesItem, GButton
+      GNav, GNavItem, GSubNav
     },
     data(){
       return {
-        selected: undefined
+        selected: ['home']
       }
     },
-
-    created() {},
 }
 </script>
 <style>
 * {margin: 0; padding: 0; box-sizing: border-box;}
-.wrapper {
-  margin: 40px;
-}
-.box {
-  width: 100%;
-  height: 300px;
-  background-color: #ddd;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 30px;
-}
 </style>

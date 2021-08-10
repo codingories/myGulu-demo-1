@@ -1,5 +1,4 @@
 const path = require('path')
-console.log('3333')
 
 module.exports = {
   css: {

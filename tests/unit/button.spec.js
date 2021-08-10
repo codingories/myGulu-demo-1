@@ -8,7 +8,7 @@ chai.use(sinonChai)
 
 
 describe('Button.vue', () => {
-  it('存在', () => {
+  xit('存在', () => {
     const wrapper = shallowMount(Button, {
       propsData: {icon: 'settings'}
     })
