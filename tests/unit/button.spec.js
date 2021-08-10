@@ -2,13 +2,13 @@ import chai, {expect} from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
 import {shallowMount, mount} from "@vue/test-utils"
-// import Button from '../../src/button/button'
+// import Button from '@/button/button.vue'
 import Vue from "vue"
 chai.use(sinonChai)
 
 
 describe('Button.vue', () => {
-  xit('存在', () => {
+  it('存在', () => {
     const wrapper = shallowMount(Button, {
       propsData: {icon: 'settings'}
     })

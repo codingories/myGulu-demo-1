@@ -34,46 +34,56 @@
   }
 </script>
 <style lang="scss" scoped>
-   //@import "../var.scss";
-   //.g-button {
-   //  font-size: $font-size;
-   //  height: $button-height;
-   //  /*加宽度不好用padding*/
-   //  padding: 0 1em; /*width*/
-   //  border-radius: $border-radius;
-   //  border: 1px solid $border-color;
-   //  background: $button-bg;
-   //   display: inline-flex;justify-content: center;align-items: center;
-   //   vertical-align: middle;
-   //  &:hover {
-   //    border-color: $border-color-hover;
-   //  }
-   //  &:active {
-   //    background-color: $button-active-bg;
-   //  }
-   //  &:focus {
-   //    outline: none;
-   //  }
-   //   > .content {
-   //      order: 2;
-   //   }
-   //   > .icon {
-   //      order: 1;
-   //      margin-right: .1em;
-   //   }
-   //
-   //   &.icon-right{
-   //      > .content {
-   //         order: 1;
-   //         margin-left: .1em;
-   //         margin-right: 0;
-   //      }
-   //      > .icon {
-   //         order: 2
-   //      }
-   //   }
-   //   .loading {
-   //      animation: spin 2s infinite linear;
-   //   }
-   //}
+   @import "../styles/var";
+   .box-shadow {
+     box-shadow: 0 0 5px rgba(0,0,0,0.15)
+   }
+
+   @keyframes spin {
+     0% {transform: rotate(0deg);}
+     100% {transform: rotate(360deg);}
+   }
+
+
+   .g-button {
+     font-size: $font-size;
+     height: $button-height;
+     /*加宽度不好用padding*/
+     padding: 0 1em; /*width*/
+     border-radius: $border-radius;
+     border: 1px solid $border-color;
+     background: $button-bg;
+      display: inline-flex;justify-content: center;align-items: center;
+      vertical-align: middle;
+     &:hover {
+       border-color: $border-color-hover;
+     }
+     &:active {
+       background-color: $button-active-bg;
+     }
+     &:focus {
+       outline: none;
+     }
+      > .content {
+         order: 2;
+      }
+      > .icon {
+         order: 1;
+         margin-right: .1em;
+      }
+
+      &.icon-right{
+         > .content {
+            order: 1;
+            margin-left: .1em;
+            margin-right: 0;
+         }
+         > .icon {
+            order: 2
+         }
+      }
+      .loading {
+         animation: spin 2s infinite linear;
+      }
+   }
 </style>
