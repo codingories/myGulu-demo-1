@@ -1,5 +1,6 @@
 <template>
   <div class="wrapper">
+    <GButton>你好</GButton>
     <g-slides  :selected.sync="selected">
       <g-slides-item name="11">
          <div class="box">1</div>
@@ -11,16 +12,19 @@
         <div class="box">3</div>
       </g-slides-item>
     </g-slides>
+
   </div>
 </template>
 <script>
-  import GSlides from './slides'
-  import GSlidesItem from './slides-item'
+  import GSlides from './slides/slides'
+  import GSlidesItem from './slides/slides-item'
+  import GButton from './button/button'
+
 
   export default {
     name: '',
     components: {
-      GSlides, GSlidesItem
+      GSlides, GSlidesItem, GButton
     },
     data(){
       return {
