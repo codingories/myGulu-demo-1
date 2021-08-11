@@ -6,6 +6,11 @@
 <script>
   export default {
     name: 'GuluNav',
+    provide () {
+      return {
+        root: this
+      }
+    },
     props: {
       selected: {
         type: Array,
@@ -16,7 +21,13 @@
         default: false
       }
     },
+    data() {
+      return {
+        items: []
+      }
+    },
     mounted () {
+      console.log('this.items', this.items)
       this.updateChildren()
       this.listenToChildren()
     },
@@ -24,15 +35,17 @@
       this.updateChildren()
     },
     computed: {
-      items() {
-        return this.$children.filter(vm => vm.$options.name === 'GuluNavItem')
-      }
+      // items() {
+      //   return this.$children.filter(vm => vm.$options.name === 'GuluNavItem')
+      // }
     },
     methods: {
+      addItem(vm) {
+        this.items.push(vm)
+      },
       updateChildren() {
         this.items.forEach(vm => {
-          console.log(vm.name)
-          if(this.selected.indexOf(vm.name) >= 0) {
+          if (this.selected.indexOf(vm.name) >= 0) {
             vm.selected = true
           } else {
             vm.selected = false
@@ -40,6 +53,7 @@
         })
       },
       listenToChildren() {
+        console.log('111', this.items)
         this.items.forEach(vm => {
           vm.$on('add:selected', (name) => {
             if(this.multiple) {

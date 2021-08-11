@@ -1,9 +1,9 @@
 <template>
   <div class="g-sub-nav">
-    <span>
+    <span @click="onClick">
       <slot name="title"></slot>
     </span>
-    <div class="g-sub-nav-popover">
+    <div class="g-sub-nav-popover" v-show="open">
       <slot></slot>
     </div>
   </div>
@@ -11,18 +11,39 @@
 <script>
   export default {
     name: 'GuluSubNav',
+    data () {
+      return {
+        open: false
+      }
+    },
+    methods: {
+      onClick() {
+        this.open = !this.open
+      }
+    }
   }
 </script>
 <style lang='scss' scoped>
   .g-sub-nav {
     position: relative;
-    padding: 10px 20px;
+    > span {
+      padding: 10px 20px;
+      display: block;
+      //vertical-align: top;
+    }
     &-popover {
       position: absolute;
       top: 100%;
       left: 0;
-      border: 1px solid red;
       white-space: nowrap;
+      border: 1px solid black;
     }
   }
+
+ .g-sub-nav .g-sub-nav .g-sub-nav-popover {
+   top: 0;
+   left: 100%;
+   margin-left: 8px;
+ }
+
 </style>
