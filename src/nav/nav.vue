@@ -27,7 +27,6 @@
       }
     },
     mounted () {
-      console.log('this.items', this.items)
       this.updateChildren()
       this.listenToChildren()
     },
@@ -53,7 +52,6 @@
         })
       },
       listenToChildren() {
-        console.log('111', this.items)
         this.items.forEach(vm => {
           vm.$on('add:selected', (name) => {
             if(this.multiple) {
