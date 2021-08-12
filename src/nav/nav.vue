@@ -1,5 +1,6 @@
 <template>
   <div class="g-nav">
+    {{ namePath }}
     <slot></slot>
   </div>
 </template>
@@ -23,7 +24,8 @@
     },
     data() {
       return {
-        items: []
+        items: [],
+        namePath: []
       }
     },
     mounted () {
