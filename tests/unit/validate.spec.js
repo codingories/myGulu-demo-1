@@ -194,4 +194,29 @@ describe('Validator', () => {
     }).to.throw()
   })
 
+
+  it('可以全局添加新规则', ()=>{
+    let data = {
+      email: 'abc'
+    }
+    let validator1 = new Validator()
+    let validator2 = new Validator()
+
+    Validator.add('hasNumber', (value) => {
+      if (!/\d/.test(value)) {
+        return '必须含有数字'
+      }
+    })
+
+
+    let rules = [{key: 'email', required: true, hasNumber: true}]
+
+    expect(() => {
+      validator1.validate(data, rules)
+    }).to.not.throw()
+    expect(() => {
+      validator2.validate(data, rules)
+    }).to.not.throw()
+  })
+
 })

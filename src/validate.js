@@ -1,4 +1,7 @@
 class Validator {
+  static add(name, fn) {
+    Validator.prototype[name] = fn
+  }
   constructor() {}
   validate(data, rules) {
     let errors = {}
@@ -14,9 +17,7 @@ class Validator {
       }
 
       let validators = Object.keys(rule).filter(key => (key !== 'key') && (key !== 'required'))
-      // 遍历 vali dators, 并逐一调用对应的函数
       validators.forEach((validatorKey) => {
-        // key is pattern / minLength / maxLength / hasNumber string
         if(this[validatorKey]) {
           console.log('33333333')
           let error = this[validatorKey](value, rule[validatorKey])
