@@ -94,7 +94,6 @@
         this.close()
       },
       open () {
-        console.log('xxx')
         this.visible = true
         this.$nextTick(() => {
           this.positionContent()

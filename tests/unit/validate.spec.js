@@ -41,7 +41,6 @@ describe('Validator', () => {
     ]
     let validator = new Validator(data, rules)
     let errors = validator.validate(data, rules)
-    console.log('errors ccc', errors)
     expect(errors.email.pattern).to.eq('格式不正确')
   })
   it('pattern 通过', () => {

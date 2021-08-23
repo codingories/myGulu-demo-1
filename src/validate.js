@@ -19,7 +19,6 @@ class Validator {
       let validators = Object.keys(rule).filter(key => (key !== 'key') && (key !== 'required'))
       validators.forEach((validatorKey) => {
         if(this[validatorKey]) {
-          console.log('33333333')
           let error = this[validatorKey](value, rule[validatorKey])
           if (error) {
             ensureObject(errors, rule.key)
