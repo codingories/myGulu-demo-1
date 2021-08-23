@@ -4,6 +4,8 @@
   "description": "这是一个UI框架",
   "main": "dist/index.js",
   "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "NODE_ENV=production vuepress build docs",
     "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -35,6 +37,7 @@
     "sinon": "^11.1.1",
     "sinon-chai": "^3.7.0",
     "vue-template-compiler": "^2.6.11",
+    "vuepress": "^1.8.2",
     "yarn": "^1.22.11"
   },
   "browserslist": [
