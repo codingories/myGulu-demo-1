@@ -2,6 +2,13 @@ module.exports = {
   base:'/myGulu-demo-1/',
   title: '轱辘UI',
   description: '一个好用UI页面',
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@': '../../../src'
+      }
+    }
+  },
   themeConfig: {
     sidebar: [
       {
