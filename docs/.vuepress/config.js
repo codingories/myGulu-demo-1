@@ -1,6 +1,6 @@
 module.exports = {
   base:'/myGulu-demo-1/',
-  title: '轱辘UI',
+  title: 'Glory UI',
   description: '一个好用UI页面',
   configureWebpack: {
     resolve: {

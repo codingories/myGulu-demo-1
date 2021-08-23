@@ -1,14 +1,14 @@
 {
-  "name": "mygulu-demo-test-1-1",
+  "name": "vue-glory-ui",
   "version": "0.0.3",
   "description": "这是一个UI框架",
-  "main": "dist/index.js",
+  "main": "dist/GloryLib.umd.js",
   "scripts": {
     "docs:dev": "vuepress dev docs",
     "docs:build": "NODE_ENV=production vuepress build docs",
+    "build": "vue-cli-service build --target lib --name GloryLib src/index.js",
     "start": "vue-cli-service serve",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
     "test": "karma start --single-run",
     "test:old": "vue-cli-service test:unit",
     "test:unit": "vue-cli-service test:unit",

@@ -1,0 +1,15 @@
+/.idea/
+/docs/
+/src/
+/tests/
+.browserslistrc
+/public/
+karma.conf.js
+/.github/
+.cache
+deploy.sh
+vue.config.js
+yarn-error.log
+.babelrc.js
+babel.config.js
+

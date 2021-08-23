@@ -1,20 +1,20 @@
 ---
 home: true
-heroImage: /springfield-dim-sum-800px.png
-heroText: Hero 标题
-tagline: Hero 副标题
+heroImage: /glory.png
+heroText: glory UI
+tagline: 一款易于阅读源码的vue ui框架
 actionText: 快速上手 →
-actionLink: /components/button
+actionLink: /install/
 features:
-- title: 简洁至上
-  details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
-- title: Vue驱动
-  details: 享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
-- title: 高性能
-  details: VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。
-  footer: MIT Licensed | Copyright © 2018-present Evan You
+- title: 
+  details: 
+- title: 简介
+  details: 本框架主要用于个人学习制作各类ui组件，请不要在生产环境中使用，当然你一定要用，我也没办法阻止你，但是出了任何问题概不负责。
+- title: 
+  details:
+  footer: MIT Licensed | Copyright © 2021-present Ories Zhu
 ---
 
-# 轱辘 UI
+# Glory UI
 
-轱辘 UI 是一个好用的 UI 框架, 提供 ... 等常用组件，适合移动端和 PC 端使用。
+Glory UI 包含button,grid,nav,tabs 等常用组件，适合移动端和 PC 端使用。

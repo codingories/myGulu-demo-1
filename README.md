@@ -1,5 +1,4 @@
 # 轱辘 - 一个 Vue UI 组件
-[![Build Status](https://travis-ci.com/codingories/myGulu-demo-1.svg?branch=master)](https://travis-ci.com/codingories/myGulu-demo-1)
 ![ci](https://github.com/codingories/myGulu-demo-1/actions/workflows/ci.yml/badge.svg)
 
 ## 介绍
