@@ -14,7 +14,6 @@
 </template>
 
 <script>
-import Button from '@/button/button.vue'
 import GTabs from '@/tabs/tabs'
 import GTabsBody from '@/tabs/tabs-body'
 import GTabsHead from '@/tabs/tabs-head'
@@ -28,7 +27,6 @@ export default {
     }
   },
   components: {
-    'g-button': Button,
     GTabs,GTabsBody,GTabsHead,GTabsItem,GTabsPane
   }
 }

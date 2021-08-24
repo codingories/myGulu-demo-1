@@ -8,11 +8,40 @@ title: Tabs
 <tabs-demos></tabs-demos>
 
 ## 如何使用
+
 ```vue
-<div>
-  <g-button>默认按钮</g-button>
-  <g-button icon="settings">默认按钮</g-button>
-  <g-button :loading="true">默认按钮</g-button>
-  <g-button disabled>默认按钮</g-button>
-</div>
+<template>
+  <div style="margin-top:20px">
+    <g-tabs :selected="selected">
+      <g-tabs-head>
+        <g-tabs-item name="1">1</g-tabs-item>
+        <g-tabs-item name="2">2</g-tabs-item>
+      </g-tabs-head>
+      <g-tabs-body>
+        <g-tabs-pane name="1">content 1</g-tabs-pane>
+        <g-tabs-pane name="2">content 2</g-tabs-pane>
+      </g-tabs-body>
+    </g-tabs>
+  </div>
+</template>
+
+<script>
+import GTabs from '@/tabs/tabs'
+import GTabsBody from '@/tabs/tabs-body'
+import GTabsHead from '@/tabs/tabs-head'
+import GTabsItem from '@/tabs/tabs-item'
+import GTabsPane from '@/tabs/tabs-pane'
+
+export default {
+  data() {
+    return {
+      selected:'1'
+    }
+  },
+  components: {
+    GTabs,GTabsBody,GTabsHead,GTabsItem,GTabsPane
+  }
+}
+</script>
+
 ```

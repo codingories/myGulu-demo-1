@@ -1,10 +1,3 @@
----
-title: Grid
----
-# 网格
-
-<grid-demo-1></grid-demo-1>
-```vue
 <template>
   <div style="padding-top: 16px;">
     <h2>24格网格</h2>
@@ -121,11 +114,3 @@ title: Grid
     }
   }
 </script>
-```
-
-
-
-<grid-demo-2></grid-demo-2>
-
-<grid-demo-3></grid-demo-3>
-
