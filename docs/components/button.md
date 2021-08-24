@@ -4,16 +4,16 @@ title: Button
 
 # 按钮
 
-使用方法
-<ClientOnly>
-    <button-demos></button-demos>
-</ClientOnly>
+## 使用效果 
 
-# 如何使用  {2, 3, 4} 表示标记为黑色
-```js {2}
-export default function sayHello () {
-  console.log('Hello');
-  console.log('World');
-  console.log('!');
-}
+<button-demos></button-demos>
+
+## 如何使用
+```vue
+<div>
+  <g-button>默认按钮</g-button>
+  <g-button icon="settings">默认按钮</g-button>
+  <g-button :loading="true">默认按钮</g-button>
+  <g-button disabled>默认按钮</g-button>
+</div>
 ```

@@ -14,7 +14,6 @@
     mounted(){
       this.eventBus.$on('update:selected', (item, vm) => {
         // 获取到当前active的是哪个元素
-        console.log(vm.$el)
         // 把线移到下面
         let {width, left} = vm.$el.getBoundingClientRect()
         this.$refs.line.style.width = `${width}px`
