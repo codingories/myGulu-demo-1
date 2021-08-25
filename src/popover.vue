@@ -1,6 +1,5 @@
 <template>
   <div class="popover"  ref="popover">
-    {{trigger}}
     <div ref="contentWrapper" class="content-wrapper"  v-show="visible"
       :class="{[`position-${position}`] : true}">
       <slot name="content"></slot>

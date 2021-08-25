@@ -1,3 +1,11 @@
+---
+title: Slides
+---
+# 轮播
+
+<slides-demo-1></slides-demo-1>
+
+```vue
 <template>
   <div style="padding-top: 16px;">
     <h2>简单用法</h2>
@@ -44,3 +52,5 @@
     align-items: center;
   }
 </style>
+
+```

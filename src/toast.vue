@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper" :class="toastClass">
+  <div class="wrapper gulu-toast" :class="toastClass">
     <div class="toast" ref="toast">
       <div class="message">
         <slot v-if="!enableHtml"></slot>
@@ -19,7 +19,7 @@
     props: {
       autoClose: {
         type: [ Boolean, Number],
-        default: 5,
+        default: 50,
         validator(value) {
           return value === false || typeof value === 'number';
         }
