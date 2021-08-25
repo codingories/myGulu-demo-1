@@ -34,6 +34,8 @@ title: Input
 
 <input-demo-2></input-demo-2>
 
+## 代码
+
 ```vue
 <template>
   <div style="padding-top: 16px;">

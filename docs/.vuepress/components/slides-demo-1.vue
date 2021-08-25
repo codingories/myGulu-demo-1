@@ -59,7 +59,7 @@
               display: flex;
               justify-content: center;
               align-items: center;
-            } 
+            }
           </style>
 
       `.replace(/^ {8}/gm, '').trim()
@@ -68,7 +68,7 @@
   }
 </script>
 <style lang="scss" scoped>
-  @import 'var';
+  @import '../../../src/styles/var';
   .box{
     height: 300px;
     background: $blue;
@@ -77,5 +77,5 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  } 
+  }
 </style>

@@ -33,5 +33,4 @@ export default {
 </script>
 ```
 
-## 双向绑定
 
