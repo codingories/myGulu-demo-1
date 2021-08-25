@@ -4,8 +4,9 @@ title: Layout
 # 布局
 
 ## 预览
-
+<ClientOnly>
 <layout-demo-1></layout-demo-1>
+</ClientOnly>
 
 ## 代码
 ```vue

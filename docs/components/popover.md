@@ -3,8 +3,9 @@ title: Popover
 ---
 
 # 弹出层
-
+<ClientOnly>
 <popover-demo-1> </popover-demo-1>
+</ClientOnly>
 
 ### 代码
 ```vue
@@ -65,8 +66,9 @@ title: Popover
   }
 </script>
 ```
-
+<ClientOnly>
 <popover-demo-2> </popover-demo-2>
+</ClientOnly>
 
 ```vue
 <template>

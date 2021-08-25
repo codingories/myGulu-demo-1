@@ -3,7 +3,8 @@ title: Grid
 ---
 # 网格
 
-<grid-demo-1></grid-demo-1>
+<ClientOnly><grid-demo-1></grid-demo-1></ClientOnly>
+
 ```vue
 <template>
   <div style="padding-top: 16px;">

@@ -4,8 +4,10 @@ title: Tabs
 # 标签
 
 ## 使用效果
+<ClientOnly>
 
 <tabs-demos></tabs-demos>
+</ClientOnly>
 
 ## 如何使用
 

@@ -6,10 +6,12 @@ title: Button
 
 ## 简单使用 
 
-<button-demos></button-demos>
+<ClientOnly><button-demos-1></button-demos-1> </ClientOnly>
 
 ## 代码
+
 ```vue
+
 <template>
   <div style="margin-top:20px">
     <g-button>默认按钮</g-button>
@@ -18,10 +20,8 @@ title: Button
     <g-button disabled>默认按钮</g-button>
   </div>
 </template>
-
 <script>
 import Button from '@/button/button.vue'
-
 export default {
   data() {
     return {}
