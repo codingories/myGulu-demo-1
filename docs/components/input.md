@@ -57,7 +57,6 @@ title: Input
 </template>
 
 <script>
-
 import GInput from '@/input'
 export default {
   components: {GInput},
