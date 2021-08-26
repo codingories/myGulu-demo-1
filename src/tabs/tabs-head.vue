@@ -22,7 +22,6 @@
       updateLinePosition (selectedVm) {
         let {width, left} = selectedVm.$el.getBoundingClientRect()
         let {left: left2} = this.$refs.head.getBoundingClientRect()
-        // console.log('width,left2', width,left2)
         this.$refs.line.style.width = `${width}px`
         this.$refs.line.style.left = `${left - left2}px`
       }
