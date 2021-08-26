@@ -1,10 +1,39 @@
 <template>
   <div class="gulu-pager">
-    <span v-for="page in pages">
+    <span v-for="page in pages" class="gulu-pager-item"
+      :class="{active: page === currentPage, separator: page === '...'}"
+    >
       {{page}}
-    </span>
+     </span>
   </div>
 </template>
+<style scoped lang="scss">
+  @import "./styles/var";
+  .gulu-pager {
+    &-item {
+      border: 1px solid #e1e1e1;
+      border-radius: $border-radius;
+      padding: 0 4px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 12px;
+      min-width: 20px;
+      height: 20px;
+      margin: 0 4px;
+      cursor: pointer;
+      &.separator {
+        border: none;
+      }
+      &.active, &:hover {
+        border-color: $blue;
+      }
+      &.active {
+        cursor: default;
+      }
+    }
+  }
+</style>
 <script>
   export default {
     name: 'GuluPager',
