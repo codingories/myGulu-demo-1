@@ -1,6 +1,6 @@
 <template>
   <div style="margin:20px;">
-    <g-pager :total-page="20" :current-page="20" ></g-pager>
+    <g-pager :total-page="1" :current-page.sync="currentPage" hide-if-one-page></g-pager>
   </div>
 </template>
 <script>
@@ -12,7 +12,9 @@
       'g-pager':Gpager
     },
     data(){
-      return {}
+      return {
+        currentPage: 1
+      }
     },
 }
 </script>

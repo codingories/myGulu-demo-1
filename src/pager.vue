@@ -1,6 +1,8 @@
 <template>
-  <div class="gulu-pager">
-    <span class="gulu-pager-nav prev" :class="{disabled: currentPage === 1}">
+  <div class="gulu-pager" :class="{hide: hideIfOnePage === true && totalPage <= 1}">
+    <span class="gulu-pager-nav prev" :class="{disabled: currentPage === 1}"
+      @click="onClickPage(currentPage-1)"
+    >
       <g-icon name="left"></g-icon>
     </span>
     <template v-for="page in pages">
@@ -11,10 +13,12 @@
         <g-icon class="gulu-pager-separator" name="dots"></g-icon>
       </template>
       <template v-else>
-        <span href="#" class="gulu-pager-item">{{page}}</span>
+        <span href="#" class="gulu-pager-item" @click="onClickPage(page)">{{page}}</span>
       </template>
     </template>
-    <span class="gulu-pager-nav next" :class="{disabled: currentPage === totalPage}">
+    <span class="gulu-pager-nav next" :class="{disabled: currentPage === totalPage}"
+      @click="onClickPage(currentPage + 1)"
+    >
       <g-icon name="right"></g-icon>
     </span>
   </div>
@@ -24,12 +28,16 @@
   @import "./styles/var";
 
   .gulu-pager {
+    user-select: none;
     display: flex;
     justify-content: flex-start;
     align-items: center;
     $width: 20px;
     $height: 20px;
     $font-size: 12px;
+    &.hide {
+      display: none;
+    }
     &-separator {
       width: $width;
       font-size: $font-size;
@@ -64,11 +72,13 @@
       align-items:center;
       background: $grey;
       height: $height;
-      width: $height;
+      width: $width;
       border-radius: $border-radius;
       font-size: $font-size;
+      cursor: pointer;
       &.disabled {
         svg {
+          cursor: default;
           fill: darken($grey, 30%);
         }
       }
@@ -91,21 +101,33 @@ import GIcon from './icon'
       },
       hideIfOnePage: {
         type: Boolean,
-        default: true
+        default: false
       }
     },
     data () {
-      let pages = [1, this.totalPage, this.currentPage, this.currentPage-1,this.currentPage-2, this.currentPage + 1, this.currentPage +2]
-      let u = unique(pages
-          .filter((n) => n >= 1 && n <= this.totalPage)
-          .sort((a, b)=> a - b))
-      let u2 = u.reduce((prev, current, index) => {
-        prev.push(current)
-        u[index + 1] !== undefined && u[index + 1] - u[index] > 1&& prev.push('...')
-        return prev
-      },[])
       return {
-        pages: u2
+      }
+    },
+    computed: {
+      pages() {
+        console.log('运行了')
+        let pages = [1, this.totalPage, this.currentPage, this.currentPage-1,this.currentPage-2, this.currentPage + 1, this.currentPage +2]
+        let u = unique(pages
+            .filter((n) => n >= 1 && n <= this.totalPage)
+            .sort((a, b)=> a - b))
+        let u2 = u.reduce((prev, current, index) => {
+          prev.push(current)
+          u[index + 1] !== undefined && u[index + 1] - u[index] > 1&& prev.push('...')
+          return prev
+        },[])
+        return u2
+      }
+    },
+    methods: {
+      onClickPage (n) {
+        if (n >= 1 && n <= this.totalPage) {
+          this.$emit('update:currentPage', n)
+        }
       }
     }
 }
