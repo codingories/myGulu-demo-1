@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="margin:20px;">
-      <g-table :columns="columns" :data-source="dataSource"></g-table>
+      <g-table :columns="columns" :data-source="dataSource" bordered></g-table>
       <g-pager :total-page="10" :current-page.sync="currentPage" hide-if-one-page></g-pager>
     </div>
   </div>
@@ -26,6 +26,12 @@
         dataSource: [
           {id: 1, name: '方方', score: 100},
           {id: 2, name: '圆圆', score: 99},
+          {id: 3, name: '张三', score: 99},
+          {id: 4, name: '李四', score: 99},
+          {id: 5, name: '我', score: 99},
+          {id: 6, name: '的', score: 99},
+          {id: 7, name: '请求', score: 99},
+
         ]
       }
     },
