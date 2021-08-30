@@ -1,7 +1,20 @@
 <template>
   <div>
     <table>
-
+      <thead>
+        <tr>
+          <th>#</th>
+          <th v-for="column in columns">
+            {{column.text}}
+          </th>
+        </tr>
+      </thead>
+      <tbody v-for="item,index in dataSource">
+        <td>{{index}}</td>
+        <template v-for="column in columns">
+          <td>{{item[column.field]}}</td>
+        </template>
+      </tbody>
     </table>
   </div>
 </template>
@@ -13,7 +26,7 @@
         type: Array,
         required: true
       },
-      data: {
+      dataSource: {
         type: Array,
         required: true
       }
