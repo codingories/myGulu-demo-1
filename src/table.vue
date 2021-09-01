@@ -12,7 +12,7 @@
       </thead>
       <tbody>
         <tr v-for="(item,index) in dataSource">
-          <td><input type="checkbox"/></td>
+          <td><input type="checkbox" @change="onChangeItem(item, index, $event)"/></td>
           <td v-if="numberVisible">{{index + 1}}</td>
           <template v-for="column in columns">
             <td>{{item[column.field]}}</td>
@@ -55,6 +55,12 @@
     data(){
       return {
 
+      }
+    },
+    methods: {
+      onChangeItem(item, index, e){
+        console.log(e.target.checked)
+        this.$emit('changeItem', {selected: e.target.checked, item, index})
       }
     }
 }

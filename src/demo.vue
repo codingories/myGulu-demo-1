@@ -1,7 +1,7 @@
 <template>
   <div>
     <div style="margin:20px;">
-      <g-table :columns="columns" :data-source="dataSource" bordered></g-table>
+      <g-table :columns="columns" :data-source="dataSource" bordered @changeItem="x"></g-table>
     </div>
     <div style="margin:20px;">
       <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false"></g-table>
@@ -40,6 +40,15 @@
         ]
       }
     },
+    methods: {
+      x(object) {
+        console.log(object)
+        let {selected, item ,index} = object
+        console.log(selected)
+        console.log(item)
+        console.log(index)
+      }
+    }
 }
 </script>
 <style>
