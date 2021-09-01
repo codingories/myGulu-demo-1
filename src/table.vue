@@ -1,6 +1,6 @@
 <template>
   <div class="gulu-table-wrapper">
-    <table class="gulu-table" :class="{bordered}">
+    <table class="gulu-table" :class="{bordered, compact, striped: striped}">
       <thead>
         <tr>
           <th><input type="checkbox"/></th>
@@ -27,6 +27,14 @@
   export default {
     name: 'GuluTable',
     props: {
+      striped: {
+        type: Boolean,
+        default: true
+      },
+      compact: {
+        type: Boolean,
+        default: false,
+      },
       columns: {
         type: Array,
         required: true
@@ -65,20 +73,29 @@
         border: 1px solid $grey;
       }
     }
+    &.compact {
+      td, th {
+        padding: 4px;
+      }
+    }
+
     td, th {
       border-bottom: 1px solid $grey;
       text-align: left;
       padding: 8px;
     }
-    tbody {
-      > tr {
-        &:nth-child(odd) {
-          background: white;
-        }
-        &:nth-child(even) {
-          background: darken($grey, 10%);;
+    &.striped {
+      tbody {
+        > tr {
+          &:nth-child(odd) {
+            background: white;
+          }
+          &:nth-child(even) {
+            background: darken($grey, 10%);;
+          }
         }
       }
     }
+
   }
 </style>

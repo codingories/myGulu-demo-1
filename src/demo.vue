@@ -2,6 +2,11 @@
   <div>
     <div style="margin:20px;">
       <g-table :columns="columns" :data-source="dataSource" bordered></g-table>
+    </div>
+    <div style="margin:20px;">
+      <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false"></g-table>
+    </div>
+    <div style="margin:20px;">
       <g-pager :total-page="10" :current-page.sync="currentPage" hide-if-one-page></g-pager>
     </div>
   </div>
