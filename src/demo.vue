@@ -1,7 +1,8 @@
 <template>
   <div>
+    {{selected}}
     <div style="margin:20px;">
-      <g-table :columns="columns" :data-source="dataSource" bordered @changeItem="x"></g-table>
+      <g-table :columns="columns" :data-source="dataSource" bordered :selectedItems.sync="selected"></g-table>
     </div>
     <div style="margin:20px;">
       <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false"></g-table>
@@ -23,11 +24,13 @@
     },
     data(){
       return {
+        selectedItems: [],
         currentPage: 1,
         columns: [
           {text:'姓名', field:'name'},
           {text:'分数', field:'score'},
         ],
+        selected: [],
         dataSource: [
           {id: 1, name: '方方', score: 100},
           {id: 2, name: '圆圆', score: 99},
@@ -36,18 +39,17 @@
           {id: 5, name: '我', score: 99},
           {id: 6, name: '的', score: 99},
           {id: 7, name: '请求', score: 99},
-
         ]
       }
     },
     methods: {
-      x(object) {
-        console.log(object)
-        let {selected, item ,index} = object
-        console.log(selected)
-        console.log(item)
-        console.log(index)
-      }
+      // x(object) {
+      //   console.log(object)
+      //   let {selected, item ,index} = object
+      //   console.log(selected)
+      //   console.log(item)
+      //   console.log(index)
+      // }
     }
 }
 </script>

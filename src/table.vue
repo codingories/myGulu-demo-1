@@ -3,7 +3,7 @@
     <table class="gulu-table" :class="{bordered, compact, striped: striped}">
       <thead>
         <tr>
-          <th><input type="checkbox"/></th>
+          <th><input type="checkbox" @change="onChangeAllItems" /></th>
           <th v-if="numberVisible">#</th>
           <th v-for="column in columns">
             {{column.text}}
@@ -12,7 +12,9 @@
       </thead>
       <tbody>
         <tr v-for="(item,index) in dataSource">
-          <td><input type="checkbox" @change="onChangeItem(item, index, $event)"/></td>
+          <td><input type="checkbox" @change="onChangeItem(item, index, $event)"
+            :checked="inSelectedItems(item)"
+          /></td>
           <td v-if="numberVisible">{{index + 1}}</td>
           <template v-for="column in columns">
             <td>{{item[column.field]}}</td>
@@ -31,6 +33,10 @@
         type: Boolean,
         default: true
       },
+      selectedItems: {
+        type: Array,
+        default: () => []
+      },
       compact: {
         type: Boolean,
         default: false,
@@ -41,7 +47,10 @@
       },
       dataSource: {
         type: Array,
-        required: true
+        required: true,
+        validator (array) {
+          return array.filter(item => item.id === undefined).length <= 0
+        }
       },
       numberVisible: {
         type: Boolean,
@@ -58,9 +67,25 @@
       }
     },
     methods: {
+      inSelectedItems(item) {
+        return this.selectedItems.filter((i) => i.id === item.id).length > 0
+      },
       onChangeItem(item, index, e){
-        console.log(e.target.checked)
-        this.$emit('changeItem', {selected: e.target.checked, item, index})
+        let selected = e.target.checked
+        let copy = JSON.parse(JSON.stringify(this.selectedItems))
+        if (selected) {
+          copy.push(item)
+        } else {
+          copy.splice(copy.indexOf(item), 1)
+        }
+        this.$emit('update:selectedItems', copy)
+      },
+      onChangeAllItems(e){
+        console.log('12345')
+        let selected = e.target.checked
+        console.log('selected',selected)
+        console.log('ppp',selected ? this.dataSource : [])
+        this.$emit('update:selectedItems', selected ? this.dataSource : [])
       }
     }
 }
