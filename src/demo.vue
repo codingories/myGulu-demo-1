@@ -1,15 +1,19 @@
 <template>
   <div>
     {{selected}}
+    <hr>
+    {{orderBy}}
     <div style="margin:20px;">
-      <g-table :columns="columns" :data-source="dataSource" bordered :selectedItems.sync="selected"></g-table>
+      <g-table :columns="columns" :data-source="dataSource" bordered :selectedItems.sync="selected" :order-by.sync="orderBy"
+      @update:orderBy="x"
+      ></g-table>
     </div>
-    <div style="margin:20px;">
-      <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false"></g-table>
-    </div>
-    <div style="margin:20px;">
-      <g-pager :total-page="10" :current-page.sync="currentPage" hide-if-one-page></g-pager>
-    </div>
+<!--    <div style="margin:20px;">-->
+<!--      <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false"></g-table>-->
+<!--    </div>-->
+<!--    <div style="margin:20px;">-->
+<!--      <g-pager :total-page="10" :current-page.sync="currentPage" hide-if-one-page></g-pager>-->
+<!--    </div>-->
   </div>
 </template>
 <script>
@@ -22,6 +26,7 @@
       'g-pager':Gpager,
       'g-table': GTable
     },
+
     data(){
       return {
         selectedItems: [],
@@ -30,6 +35,9 @@
           {text:'姓名', field:'name'},
           {text:'分数', field:'score'},
         ],
+        orderBy: {
+          score: 'desc'
+        },
         selected: [],
         dataSource: [
           {id: 1, name: '方方', score: 100},
@@ -50,6 +58,9 @@
       //   console.log(item)
       //   console.log(index)
       // }
+      x() {
+        console.log('x')
+      }
     }
 }
 </script>
