@@ -25,3 +25,6 @@ $blue: #4a90e2;
   100% {transform: rotate(360deg);}
 }
 
+@mixin spin {
+  animation: spin 2s infinite linear;
+}

@@ -7,11 +7,6 @@
           <th v-if="numberVisible">#</th>
           <th v-for="column in columns" :key="column.field">
             <div class="gulu-table-header">
-              {{column.text}}
-              <hr>
-              {{column.field}}
-              <hr>
-              {{orderBy}}
               <span v-if="column.field in orderBy" class="gulu-table-sorter" @click="changeOrderBy(column.field, 'asc')">
                 <g-icon name="asc" :class="{active: orderBy[column.field] === 'asc'}"
                        ></g-icon>
@@ -35,6 +30,9 @@
       </tbody>
 
     </table>
+    <div class="gulu-table-loading" v-if="loading">
+      <g-icon name="loading"></g-icon>
+    </div>
   </div>
 </template>
 <script>
@@ -49,6 +47,10 @@
       orderBy: {
         type: Object,
         default: () => {},
+      },
+      loading: {
+        type: Boolean,
+        default: false
       },
       striped: {
         type: Boolean,
@@ -218,6 +220,25 @@
     &-header {
       align-items: center;
       display: flex;
+    }
+    &-wrapper {
+      position: relative;
+    }
+    &-loading {
+      background: rgba(255,255,255,0.8);
+      position: absolute;
+      top:0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg {
+        width: 100px;
+        height: 100px;
+        @include spin;
+      }
     }
   }
 </style>
