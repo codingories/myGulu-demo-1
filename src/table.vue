@@ -1,35 +1,39 @@
 <template>
-  <div class="gulu-table-wrapper">
-    <table class="gulu-table" :class="{bordered, compact, striped: striped}">
-      <thead>
+  <div class="gulu-table-wrapper"  ref="wrapper">
+    <div :style="{height, overflow:'auto'}">
+      <table class="gulu-table" :class="{bordered, compact, striped: striped}" ref="table">
+        <thead>
         <tr>
           <th><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemsSelected"/></th>
           <th v-if="numberVisible">#</th>
           <th v-for="column in columns" :key="column.field">
             <div class="gulu-table-header">
+              {{column.text}}
               <span v-if="column.field in orderBy" class="gulu-table-sorter" @click="changeOrderBy(column.field, 'asc')">
                 <g-icon name="asc" :class="{active: orderBy[column.field] === 'asc'}"
-                       ></g-icon>
+                ></g-icon>
                 <g-icon name="desc" :class="{active: orderBy[column.field] === 'desc'}"
                 ></g-icon>
                </span>
             </div>
           </th>
         </tr>
-      </thead>
-      <tbody>
+        </thead>
+        <tbody>
         <tr v-for="(item,index) in dataSource" :key="item.id">
           <td><input type="checkbox" @change="onChangeItem(item, index, $event)"
-            :checked="inSelectedItems(item)"
+                     :checked="inSelectedItems(item)"
           /></td>
           <td v-if="numberVisible">{{index + 1}}</td>
           <template v-for="column in columns" >
             <td :key="column.field">{{item[column.field]}}</td>
           </template>
         </tr>
-      </tbody>
+        </tbody>
 
-    </table>
+      </table>
+
+    </div>
     <div class="gulu-table-loading" v-if="loading">
       <g-icon name="loading"></g-icon>
     </div>
@@ -44,6 +48,9 @@
     },
     name: 'GuluTable',
     props: {
+      height: {
+        type: [ Number, String]
+      },
       orderBy: {
         type: Object,
         default: () => {},
@@ -89,6 +96,20 @@
 
       }
     },
+    mounted() {
+      // 复制table
+      let table2 = this.$refs.table.cloneNode(true)
+      this.table2 = table2
+      table2.classList.add('gulu-table-copy')
+      this.updateHeadersWidth()
+      this.$refs.wrapper.appendChild(table2)
+      this.onWindowResize = () => this.updateHeadersWidth()
+      window.addEventListener('resize', this.onWindowResize)
+    },
+    beforeDestroy() {
+      window.removeEventListener('resize', this.onWindowResize)
+      this.table2.remove()
+    },
     computed: {
       areAllItemsSelected(){
         const a = this.dataSource.map(item => item.id).sort()
@@ -119,6 +140,22 @@
       }
     },
     methods: {
+      updateHeadersWidth(){
+        let table2 = this.table2;
+        let tableHeader = Array.from(this.$refs.table.children).filter(node => node.tagName.toLowerCase() === 'thead')[0]
+        let tableHeader2
+        Array.from(table2.children).map(node => {
+          if (node.tagName.toLowerCase() !== 'thead') {
+            node.remove()
+          } else {
+            tableHeader2 = node
+          }
+        })
+        Array.from(tableHeader.children[0].children).map((th, i) => {
+          const {width} = th.getBoundingClientRect()
+          tableHeader2.children[0].children[i].style.width = width + 'px'
+        })
+      },
       changeOrderBy(key, value){
         const copy = JSON.parse(JSON.stringify(this.orderBy))
         let oldValue = copy[key]
@@ -223,6 +260,7 @@
     }
     &-wrapper {
       position: relative;
+      overflow: auto;
     }
     &-loading {
       background: rgba(255,255,255,0.8);
@@ -239,6 +277,13 @@
         height: 100px;
         @include spin;
       }
+    }
+    &-copy {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      background: red;
     }
   }
 </style>

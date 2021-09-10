@@ -2,8 +2,7 @@
   <div>
     <div style="margin:20px;">
       <g-table :columns="columns" :data-source="dataSource" bordered :selectedItems.sync="selected" :order-by.sync="orderBy"
-      @update:orderBy="x"
-               :loading="loading"
+      @update:orderBy="x" :loading="loading" height="400px"
       ></g-table>
     </div>
 <!--    <div style="margin:20px;">-->
@@ -46,6 +45,19 @@
           {id: 5, name: '我', score: 99},
           {id: 6, name: '的', score: 99},
           {id: 7, name: '请求', score: 99},
+          {id: 8, name: '我', score: 99},
+          {id: 9, name: '的', score: 99},
+          {id: 10, name: '请求', score: 99},
+          {id: 11, name: '方方', score: 100},
+          {id: 12, name: '圆圆', score: 99},
+          {id: 13, name: '张三', score: 99},
+          {id: 14, name: '李四', score: 99},
+          {id: 15, name: '我', score: 99},
+          {id: 16, name: '的', score: 99},
+          {id: 17, name: '请求', score: 99},
+          {id: 18, name: '我', score: 99},
+          {id: 19, name: '的', score: 99},
+          {id: 20, name: '请求', score: 99},
         ]
       }
     },
