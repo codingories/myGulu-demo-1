@@ -30,8 +30,8 @@
         selectedItems: [],
         currentPage: 1,
         columns: [
-          {text:'姓名', field:'name'},
-          {text:'分数', field:'score'},
+          {text:'姓名', field:'name', width: 100},
+          {text:'分数', field:'score' },
         ],
         orderBy: {
           score: 'desc'
