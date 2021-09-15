@@ -1,6 +1,6 @@
 <template>
   <div class="gulu-table-wrapper"  ref="wrapper">
-    <div :style="{height, overflow:'auto'}">
+    <div :style="{height, overflow:'auto'}" ref="tableWrapper">
       <table class="gulu-table" :class="{bordered, compact, striped: striped}" ref="table">
         <thead>
         <tr>
@@ -53,7 +53,7 @@
     name: 'GuluTable',
     props: {
       height: {
-        type: [ Number, String]
+        type: Number
       },
       orderBy: {
         type: Object,
@@ -109,16 +109,17 @@
       console.log(`this.$refs.table.children[0]`,this.$refs.table.children[0])
       let tHead = this.$refs.table.children[0]
       let {height} = tHead.getBoundingClientRect()
-      this.$refs.table.style.marginTop = height + 'px'
+      this.$refs.tableWrapper.style.marginTop = height + 'px'
+      this.$refs.tableWrapper.style.height = this.height - height + 'px'
       table2.appendChild(tHead)
       this.$refs.wrapper.appendChild(table2)
       // this.updateHeadersWidth()
       // this.onWindowResize = () => this.updateHeadersWidth()
-      window.addEventListener('resize', this.onWindowResize)
+      // window.addEventListener('resize', this.onWindowResize)
     },
     beforeDestroy() {
-      window.removeEventListener('resize', this.onWindowResize)
-      this.table2.remove()
+      // window.removeEventListener('resize', this.onWindowResize)
+      // this.table2.remove()
     },
     computed: {
       areAllItemsSelected(){
