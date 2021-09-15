@@ -2,7 +2,7 @@
   <div>
     <div style="margin:20px;">
       <g-table :columns="columns" :data-source="dataSource" bordered :selectedItems.sync="selected" :order-by.sync="orderBy"
-      @update:orderBy="x" :loading="loading" :height="400"
+      @update:orderBy="x" :loading="loading" :height="400" expend-field="description"
       ></g-table>
     </div>
 <!--    <div style="margin:20px;">-->
@@ -38,8 +38,8 @@
         },
         selected: [],
         dataSource: [
-          {id: 1, name: '方方', score: 100},
-          {id: 2, name: '圆圆', score: 99},
+          {id: 1, name: '方方', score: 100, description: '11111'},
+          {id: 2, name: '圆圆', score: 99, description: '22222'},
           {id: 3, name: '张三', score: 99},
           {id: 4, name: '李四', score: 99},
           {id: 5, name: '我', score: 99},

@@ -4,7 +4,10 @@
       <table class="gulu-table" :class="{bordered, compact, striped: striped}" ref="table">
         <thead>
         <tr>
-          <th :style="{width: '50px'}"><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemsSelected"/></th>
+
+          <th :style="{width: '50px'}" class="gulu-table-center"></th>
+
+          <th :style="{width: '50px'}" class="gulu-table-center"><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemsSelected"/></th>
           <th v-if="numberVisible" :style="{width: '50px'}">#</th>
           <th :style="{width: column.width + 'px'}"
               v-for="column in columns" :key="column.field">
@@ -21,18 +24,31 @@
         </tr>
         </thead>
         <tbody>
-        <tr v-for="(item,index) in dataSource" :key="item.id">
-          <td :style="{width: '50px'}"
-          ><input type="checkbox" @change="onChangeItem(item, index, $event)"
-                     :checked="inSelectedItems(item)"
-          /></td>
-          <td :style="{width: '50px'}"
-              v-if="numberVisible">{{index + 1}}</td>
-          <template v-for="column in columns" >
-            <td :style="{width: column.width + 'px'}"
-                :key="column.field">{{item[column.field]}}</td>
-          </template>
-        </tr>
+
+        <template v-for="(item,index) in dataSource" >
+          <tr :key="item.id">
+            <td :style="{width: '50px'}" class="gulu-table-center">
+              <g-icon name="right" class="gulu-table-expendIcon"
+                      @click="expendItem(item.id)"
+              ></g-icon>
+            </td>
+            <td :style="{width: '50px'}" class="gulu-table-center"
+            ><input type="checkbox" @change="onChangeItem(item, index, $event)"
+                    :checked="inSelectedItems(item)"
+            /></td>
+            <td :style="{width: '50px'}"
+                v-if="numberVisible">{{index + 1}}</td>
+            <template v-for="column in columns" >
+              <td :style="{width: column.width + 'px'}"
+                  :key="column.field">{{item[column.field]}}</td>
+            </template>
+          </tr>
+          <tr v-if="inExpendedIds(item.id)" :key="`${item.id}- expand`">
+            <td :colspan="columns.length + 2">
+              {{item[expendField] || "空"}}
+            </td>
+          </tr>
+        </template>
         </tbody>
 
       </table>
@@ -53,7 +69,10 @@
     name: 'GuluTable',
     props: {
       height: {
-        type: Number
+        type:  Number
+      },
+      expendField: {
+        type: String
       },
       orderBy: {
         type: Object,
@@ -97,7 +116,7 @@
     },
     data(){
       return {
-
+        expendedIds: []
       }
     },
     mounted() {
@@ -151,22 +170,16 @@
       }
     },
     methods: {
-      // updateHeadersWidth(){
-      //   let table2 = this.table2;
-      //   let tableHeader = Array.from(this.$refs.table.children).filter(node => node.tagName.toLowerCase() === 'thead')[0]
-      //   let tableHeader2
-      //   Array.from(table2.children).map(node => {
-      //     if (node.tagName.toLowerCase() !== 'thead') {
-      //       node.remove()
-      //     } else {
-      //       tableHeader2 = node
-      //     }
-      //   })
-      //   Array.from(tableHeader.children[0].children).map((th, i) => {
-      //     const {width} = th.getBoundingClientRect()
-      //     tableHeader2.children[0].children[i].style.width = width + 'px'
-      //   })
-      // },
+      inExpendedIds( id ){
+        return this.expendedIds.indexOf(id) >= 0
+      },
+      expendItem (id){
+        if(this.inExpendedIds(id)) {
+          this.expendedIds.splice(this.expendedIds.indexOf(id), 1)
+        } else {
+          this.expendedIds.push(id)
+        }
+      },
       changeOrderBy(key, value){
         const copy = JSON.parse(JSON.stringify(this.orderBy))
         let oldValue = copy[key]
@@ -296,5 +309,15 @@
       width: 100%;
       background: red;
     }
+
+    //gulu-table-expendIcon
+    &-expendIcon {
+      width: 10px;
+      height: 10px;
+    }
+    & &-center {
+      text-align: center;
+    }
   }
+
 </style>
