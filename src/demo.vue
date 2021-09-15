@@ -3,6 +3,7 @@
     <div style="margin:20px;">
       <g-table :columns="columns" :data-source="dataSource" bordered :selectedItems.sync="selected" :order-by.sync="orderBy"
       @update:orderBy="x" :loading="loading" :height="400" expend-field="description"
+               checkable
       ></g-table>
     </div>
 <!--    <div style="margin:20px;">-->

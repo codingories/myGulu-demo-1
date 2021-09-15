@@ -5,9 +5,8 @@
         <thead>
         <tr>
 
-          <th :style="{width: '50px'}" class="gulu-table-center"></th>
-
-          <th :style="{width: '50px'}" class="gulu-table-center"><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemsSelected"/></th>
+          <th v-if="expendField" :style="{width: '50px'}" class="gulu-table-center"></th>
+          <th v-if="checkable" :style="{width: '50px'}" class="gulu-table-center"><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemsSelected"/></th>
           <th v-if="numberVisible" :style="{width: '50px'}">#</th>
           <th :style="{width: column.width + 'px'}"
               v-for="column in columns" :key="column.field">
@@ -27,12 +26,12 @@
 
         <template v-for="(item,index) in dataSource" >
           <tr :key="item.id">
-            <td :style="{width: '50px'}" class="gulu-table-center">
+            <td v-if="expendField" :style="{width: '50px'}" class="gulu-table-center">
               <g-icon name="right" class="gulu-table-expendIcon"
                       @click="expendItem(item.id)"
               ></g-icon>
             </td>
-            <td :style="{width: '50px'}" class="gulu-table-center"
+            <td v-if="checkable" :style="{width: '50px'}" class="gulu-table-center"
             ><input type="checkbox" @change="onChangeItem(item, index, $event)"
                     :checked="inSelectedItems(item)"
             /></td>
@@ -44,7 +43,7 @@
             </template>
           </tr>
           <tr v-if="inExpendedIds(item.id)" :key="`${item.id}- expand`">
-            <td :colspan="columns.length + 2">
+            <td :colspan="columns.length + expendedCellColSpan">
               {{item[expendField] || "空"}}
             </td>
           </tr>
@@ -98,6 +97,10 @@
         type: Array,
         required: true
       },
+      checkable: {
+        type: Boolean,
+        default: false
+      },
       dataSource: {
         type: Array,
         required: true,
@@ -141,6 +144,16 @@
       // this.table2.remove()
     },
     computed: {
+      expendedCellColSpan() {
+        let result = 0;
+        if(this.checkable) {
+          result += 1
+        }
+        if(this.expendField) {
+          result += 1
+        }
+        return result;
+      },
       areAllItemsSelected(){
         const a = this.dataSource.map(item => item.id).sort()
         const b = this.selectedItems.map(item => item.id).sort()
