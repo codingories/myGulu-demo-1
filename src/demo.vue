@@ -4,7 +4,12 @@
       <g-table :columns="columns" :data-source="dataSource" bordered :selectedItems.sync="selected" :order-by.sync="orderBy"
       @update:orderBy="x" :loading="loading" :height="400" expend-field="description"
                checkable
-      ></g-table>
+      >
+        <template slot-scope="xxx">
+          <button @click="edit(xxx.item)">编辑</button>
+          <button @click="view(xxx.item)">查看</button>
+        </template>
+      </g-table>
     </div>
 <!--    <div style="margin:20px;">-->
 <!--      <g-table :columns="columns" :data-source="dataSource" bordered compact :striped="false"></g-table>-->
@@ -70,6 +75,12 @@
       //   console.log(item)
       //   console.log(index)
       // }
+      edit( item ) {
+        alert(`开始编辑${item.id}`)
+      },
+      view( item ) {
+        alert(`开始查看${item.id}`)
+      },
       x() {
         console.log('x')
         this.loading = true

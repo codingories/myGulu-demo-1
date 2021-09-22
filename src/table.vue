@@ -4,7 +4,6 @@
       <table class="gulu-table" :class="{bordered, compact, striped: striped}" ref="table">
         <thead>
         <tr>
-
           <th v-if="expendField" :style="{width: '50px'}" class="gulu-table-center"></th>
           <th v-if="checkable" :style="{width: '50px'}" class="gulu-table-center"><input type="checkbox" @change="onChangeAllItems" ref="allChecked" :checked="areAllItemsSelected"/></th>
           <th v-if="numberVisible" :style="{width: '50px'}">#</th>
@@ -20,6 +19,7 @@
                </span>
             </div>
           </th>
+          <th ref="actionsHeader" v-if="$scopedSlots.default"></th>
         </tr>
         </thead>
         <tbody>
@@ -41,6 +41,11 @@
               <td :style="{width: column.width + 'px'}"
                   :key="column.field">{{item[column.field]}}</td>
             </template>
+            <td v-if="$scopedSlots.default">
+              <div ref="actions" style="display: inline-block">
+                <slot :item="item"></slot>
+              </div>
+            </td>
           </tr>
           <tr v-if="inExpendedIds(item.id)" :key="`${item.id}- expand`">
             <td :colspan="columns.length + expendedCellColSpan">
@@ -51,7 +56,6 @@
         </tbody>
 
       </table>
-
     </div>
     <div class="gulu-table-loading" v-if="loading">
       <g-icon name="loading"></g-icon>
@@ -138,6 +142,26 @@
       // this.updateHeadersWidth()
       // this.onWindowResize = () => this.updateHeadersWidth()
       // window.addEventListener('resize', this.onWindowResize)
+      console.log(this.$scopedSlots)
+      if(this.$scopedSlots.default) {
+        console.log(this.$refs.actions[0])
+        let div = this.$refs.actions[0]
+        let { width } = div.getBoundingClientRect()
+        console.log('fuck width', width)
+        let parent = div.parentNode
+        let styles = getComputedStyle(parent)
+        console.log('ggg', styles)
+        console.log(styles.getPropertyValue('padding-left'))
+        let paddingLeft = styles.getPropertyValue('padding-left')
+        let paddingRight = styles.getPropertyValue('padding-right')
+        let borderLeft = styles.getPropertyValue('border-left-width')
+        let borderRight = styles.getPropertyValue('border-right-width')
+        let width2 = width + parseInt(paddingLeft) + parseInt(paddingRight) + parseInt(borderLeft) + parseInt(borderRight) + 'px'
+        this.$refs.actionsHeader.style.width = width2
+        this.$refs.actions.map(div => {
+          div.parentNode.style.width = width2
+        })
+      }
     },
     beforeDestroy() {
       // window.removeEventListener('resize', this.onWindowResize)
