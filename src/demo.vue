@@ -1,6 +1,8 @@
 <template>
   <div>
-    <g-uploader accept="image/*"  method="POST" action="http://127.0.0.1:3000/upload" name="file">
+    <g-uploader accept="image/*" method="POST" action="http://127.0.0.1:3000/upload" name="file"
+                :parseResponse="parseResponse"
+    >
       <button>上传</button>
       <template slot="tips">
         <div>只能上传 300 kb 以内的 png,jpeg 文件</div>
@@ -9,23 +11,31 @@
   </div>
 </template>
 <script>
-  import GUploader from './uploader'
-  export default {
-    name: '',
-    components: {
-      'GUploader':GUploader,
-    },
+import GUploader from './uploader'
 
-    data(){
-      return {
+export default {
+  name: '',
+  components: {
+    'GUploader': GUploader,
+  },
 
-      }
-    },
-    methods: {
-
+  data() {
+    return {
     }
+  },
+  methods: {
+    parseResponse(response) {
+      let object = JSON.parse(response)
+      let url = `http://127.0.0.1:3000/preview/${object.id}`
+      return url
+    }
+  }
 }
 </script>
 <style>
-* {margin: 0; padding: 0; box-sizing: border-box;}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 </style>

@@ -4,6 +4,7 @@
       <slot></slot>
     </div>
     <div ref="temp" style="width: 0;height: 0;  overflow:hidden;"></div>
+    <img :src="url"  alt=""/>
   </div>
 </template>
 <script>
@@ -21,10 +22,16 @@ export default {
     method: {
       type: String,
       default: 'POST'
+    },
+    parseResponse: {
+      type: Function,
+      required: true
     }
   },
   data() {
-    return {}
+    return {
+      url: 'about:blank'
+    }
   },
   methods: {
     onClickUpload() {
@@ -39,8 +46,9 @@ export default {
         formData.append(this.name, file);
         var xhr = new XMLHttpRequest()
         xhr.open(this.method, this.action)
-        xhr.onload = function () {
-          console.log(xhr.response)
+        xhr.onload = () => {
+          let url = this.parseResponse(xhr.response)
+          this.url = url
         }
         xhr.send(formData)
       })
