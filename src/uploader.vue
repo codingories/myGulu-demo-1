@@ -4,7 +4,7 @@
       <slot></slot>
     </div>
     <div ref="temp" style="width: 0;height: 0;  overflow:hidden;"></div>
-    <img :src="url"  alt=""/>
+    <img :src="url" alt=""/>
   </div>
 </template>
 <script>
@@ -35,24 +35,35 @@ export default {
   },
   methods: {
     onClickUpload() {
+      let input = this.createInput()
+      input.addEventListener('change', () => {
+        let file = input.files[0]
+        this.uploadFile(file)
+        input.remove()
+      })
+      input.click()
+    },
+    uploadFile(file) {
+      let formData = new FormData();
+      formData.append(this.name, file);
+      this.doUploadFile(formData, (response) => {
+        this.url = this.parseResponse(response)
+      })
+    },
+    doUploadFile(formData, success) {
+      let xhr = new XMLHttpRequest()
+      xhr.open(this.method, this.action)
+      xhr.onload = () => {
+        success(xhr.response)
+      }
+      xhr.send(formData)
+    },
+
+    createInput() {
       let input = document.createElement('input')
       input.type = 'file'
       this.$refs.temp.appendChild(input)
-      input.addEventListener('change', () => {
-        let file = input.files[0]
-        input.remove()
-        console.log(file)
-        let formData = new FormData();
-        formData.append(this.name, file);
-        var xhr = new XMLHttpRequest()
-        xhr.open(this.method, this.action)
-        xhr.onload = () => {
-          let url = this.parseResponse(xhr.response)
-          this.url = url
-        }
-        xhr.send(formData)
-      })
-      input.click()
+      return input
     }
   }
 }
