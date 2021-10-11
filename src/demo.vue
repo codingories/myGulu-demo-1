@@ -1,7 +1,7 @@
 <template>
   <div>
     <g-uploader accept="image/*" method="POST" action="http://127.0.0.1:3000/upload" name="file"
-                :parseResponse="parseResponse"
+                :parseResponse="parseResponse" :fileList.sync="fileList"
     >
       <button>上传</button>
       <template slot="tips">
@@ -21,6 +21,7 @@ export default {
 
   data() {
     return {
+      fileList: [],
     }
   },
   methods: {

@@ -4,7 +4,12 @@
       <slot></slot>
     </div>
     <div ref="temp" style="width: 0;height: 0;  overflow:hidden;"></div>
-    <img :src="url" alt=""/>
+    <ol>
+      <li v-for="file in fileList" :key="file.name">
+        <img :src="file.url" width="100" height="100" alt="">
+        {{ file.name }}
+      </li>
+    </ol>
   </div>
 </template>
 <script>
@@ -26,6 +31,10 @@ export default {
     parseResponse: {
       type: Function,
       required: true
+    },
+    fileList: {
+      type: Array,
+      default: () => []
     }
   },
   data() {
@@ -46,8 +55,18 @@ export default {
     uploadFile(file) {
       let formData = new FormData();
       formData.append(this.name, file);
+      let {name, size, type} = file
       this.doUploadFile(formData, (response) => {
-        this.url = this.parseResponse(response)
+        let url = this.parseResponse(response)
+        this.url = url
+        while (this.fileList.filter(f => f.name === name).length > 0) {
+          let dotIndex = name.lastIndexOf('.')
+          let nameWithoutExtension = name.substring(0, dotIndex)
+          let extension = name.substring(dotIndex)
+          name = nameWithoutExtension + '(1)' + extension
+        }
+        console.log(`name2`, name)
+        this.$emit('update:fileList', [...this.fileList, {name, type, size, url}])
       })
     },
     doUploadFile(formData, success) {
