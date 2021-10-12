@@ -1,5 +1,6 @@
 <template>
   <div>
+    {{fileList}}
     <g-uploader accept="image/*" method="POST" action="http://127.0.0.1:3000/upload" name="file"
                 :parseResponse="parseResponse" :fileList.sync="fileList"
     >

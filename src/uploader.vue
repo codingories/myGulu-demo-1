@@ -6,6 +6,9 @@
     <div ref="temp" style="width: 0;height: 0;  overflow:hidden;"></div>
     <ol>
       <li v-for="file in fileList" :key="file.name">
+        <template v-if="file.status === 'uploading'">
+          菊花
+        </template>
         <img :src="file.url" width="100" height="100" alt="">
         <button @click="onRemoveFile(file)">x</button>
       </li>
@@ -55,28 +58,46 @@ export default {
     onClickUpload() {
       let input = this.createInput()
       input.addEventListener('change', () => {
-        let file = input.files[0]
-        this.uploadFile(file)
+        this.uploadFile(input.files[0])
         input.remove()
       })
       input.click()
     },
-    uploadFile(file) {
+    afterUploadFile(newName, url) {
+      // 首先从fileList找到要更新的file同时拿到它的index
+      let file = this.fileList.filter(f => f.name === newName)[0]
+      let index = this.fileList.indexOf(file)
+      // copy一下这个file，然后改它的两个内容一个是url一个是status
+
+      let fileCopy = JSON.parse(JSON.stringify(file))
+      fileCopy.url = url
+      fileCopy.status = 'success'
+      let fileListCopy = [...this.fileList]
+      fileListCopy.splice(index, 1, fileCopy)
+      // 得到新的fileList然后emit出去
+      this.$emit('update:fileList', fileListCopy)
+    },
+    uploadFile(rawFile) {
+      let {name, size, type} = rawFile
+      let newName = this.generateName(name)
+      this.beforeUploadFile(rawFile, newName)
       let formData = new FormData();
-      formData.append(this.name, file);
-      let {name, size, type} = file
+      formData.append(this.name, rawFile);
       this.doUploadFile(formData, (response) => {
         let url = this.parseResponse(response)
         this.url = url
-        while (this.fileList.filter(f => f.name === name).length > 0) {
-          let dotIndex = name.lastIndexOf('.')
-          let nameWithoutExtension = name.substring(0, dotIndex)
-          let extension = name.substring(dotIndex)
-          name = nameWithoutExtension + '(1)' + extension
-        }
-        console.log(`name2`, name)
-        this.$emit('update:fileList', [...this.fileList, {name, type, size, url}])
+        // 生成新的name
+        this.afterUploadFile(newName,  url)  // file 1 文件实体 2 {name, type, size} 自己定义的对象
       })
+    },
+    generateName(name) {
+      while (this.fileList.filter(f => f.name === name).length > 0) {
+        let dotIndex = name.lastIndexOf('.')
+        let nameWithoutExtension = name.substring(0, dotIndex)
+        let extension = name.substring(dotIndex)
+        name = nameWithoutExtension + '(1)' + extension
+      }
+      return name
     },
     doUploadFile(formData, success) {
       let xhr = new XMLHttpRequest()
@@ -92,6 +113,10 @@ export default {
       input.type = 'file'
       this.$refs.temp.appendChild(input)
       return input
+    },
+    beforeUploadFile(rawFile, newName, url) {
+      let {size, type} = rawFile
+      this.$emit('update:fileList', [...this.fileList, {name: newName, type, size, status: "uploading"}])
     }
   }
 }
