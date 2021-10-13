@@ -7,10 +7,10 @@
       <li v-for="file in fileList" :key="file.name">
 
         <template v-if="file.status === 'uploading'">
-          菊花
+          <g-icon name="loading" class="gulu-uploader-spin"></g-icon>
         </template>
 
-        <template v-if="file.type.indexOf('image') === 0">
+        <template v-else-if="file.type.indexOf('image') === 0">
           <img class="gulu-uploader-image" :src="file.url" width="32" height="32" alt="">
         </template>
         <template v-else>
@@ -25,8 +25,10 @@
   </div>
 </template>
 <script>
+import GIcon from './icon'
 export default {
   name: 'GuluUploader',
+  components: {GIcon},
   props: {
     name: {
       type: String,
@@ -192,6 +194,11 @@ export default {
   &-remove {
     width: 32px;
     height: 32px;
+  }
+  &-spin {
+    width: 32px;
+    height: 32px;
+    @include spin;
   }
 }
 </style>
