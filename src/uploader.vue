@@ -3,16 +3,25 @@
     <div @click="onClickUpload">
       <slot></slot>
     </div>
-    <div ref="temp" style="width: 0;height: 0;  overflow:hidden;"></div>
-    <ol>
+    <ol class="gulu-uploader-fileList">
       <li v-for="file in fileList" :key="file.name">
+
         <template v-if="file.status === 'uploading'">
           菊花
         </template>
-        <img :src="file.url" width="100" height="100" alt="">
-        <button @click="onRemoveFile(file)">x</button>
+
+        <template v-if="file.type.indexOf('image') === 0">
+          <img class="gulu-uploader-image" :src="file.url" width="32" height="32" alt="">
+        </template>
+        <template v-else>
+          <div class="gulu-uploader-defaultImage"></div>
+        </template>
+        <span class="gulu-uploader-name" :class="{[file.status]: file.status}">{{ file.name }}</span>
+        <button class="gulu-uploader-remove" @click="onRemoveFile(file)">x</button>
       </li>
     </ol>
+    <div ref="temp" style="width: 0;height: 0;  overflow:hidden;"></div>
+
   </div>
 </template>
 <script>
@@ -68,7 +77,6 @@ export default {
       let file = this.fileList.filter(f => f.name === newName)[0]
       let index = this.fileList.indexOf(file)
       // copy一下这个file，然后改它的两个内容一个是url一个是status
-
       let fileCopy = JSON.parse(JSON.stringify(file))
       fileCopy.url = url
       fileCopy.status = 'success'
@@ -87,8 +95,24 @@ export default {
         let url = this.parseResponse(response)
         this.url = url
         // 生成新的name
-        this.afterUploadFile(newName,  url)  // file 1 文件实体 2 {name, type, size} 自己定义的对象
+        this.afterUploadFile(newName, url)  // file 1 文件实体 2 {name, type, size} 自己定义的对象
+      }, () => {
+        console.log(this.fileList)
+        console.log(`this.fileList.length`)
+        console.log(this.fileList.length)
+        console.log('上传失败了')
+        this.uploadError(newName)
       })
+    },
+    uploadError(newName) {
+      let file = this.fileList.filter(f => f.name === newName)[0]
+      console.log('fuck1', file)
+      let index = this.fileList.indexOf(file)
+      let fileCopy = JSON.parse(JSON.stringify(file))
+      fileCopy.status = 'fail'
+      let fileListCopy = [...this.fileList]
+      fileListCopy.splice(index, 1, fileCopy)
+      this.$emit('update:fileList', fileListCopy)
     },
     generateName(name) {
       while (this.fileList.filter(f => f.name === name).length > 0) {
@@ -99,11 +123,15 @@ export default {
       }
       return name
     },
-    doUploadFile(formData, success) {
+    doUploadFile(formData, success, fail) {
       let xhr = new XMLHttpRequest()
       xhr.open(this.method, this.action)
       xhr.onload = () => {
-        success(xhr.response)
+        if (Math.random() > 0.5) {
+          success(xhr.response)
+        } else {
+          fail()
+        }
       }
       xhr.send(formData)
     },
@@ -116,13 +144,54 @@ export default {
     },
     beforeUploadFile(rawFile, newName, url) {
       let {size, type} = rawFile
+      console.log('插入占位符')
       this.$emit('update:fileList', [...this.fileList, {name: newName, type, size, status: "uploading"}])
     }
   }
 }
 </script>
 <style lang='scss' scoped>
+@import '../src/styles/var';
+
 .gulu-uploader {
 
+  &-fileList {
+    list-style: none;
+
+    > li {
+      display: flex;
+      align-items: center;
+      margin: 8px 0;
+      border: 1px solid darken($grey, 10%);
+    }
+  }
+
+  &-defaultImage {
+    border: 1px solid red;
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+  }
+
+  &-image {
+    margin-right: 8px;
+  }
+
+  &-name {
+    margin-right: auto;
+
+    &.success {
+      color: green;
+    }
+
+    &.fail {
+      color: red;
+    }
+  }
+
+  &-remove {
+    width: 32px;
+    height: 32px;
+  }
 }
 </style>
