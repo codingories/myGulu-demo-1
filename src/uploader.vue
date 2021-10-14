@@ -26,6 +26,7 @@
 </template>
 <script>
 import GIcon from './icon'
+
 export default {
   name: 'GuluUploader',
   components: {GIcon},
@@ -49,6 +50,9 @@ export default {
     fileList: {
       type: Array,
       default: () => []
+    },
+    sizeLimit: {
+      type: Number
     }
   },
   data() {
@@ -90,7 +94,9 @@ export default {
     uploadFile(rawFile) {
       let {name, size, type} = rawFile
       let newName = this.generateName(name)
-      this.beforeUploadFile(rawFile, newName)
+      if (!this.beforeUploadFile(rawFile, newName)) {
+        return
+      }
       let formData = new FormData();
       formData.append(this.name, rawFile);
       this.doUploadFile(formData, (response) => {
@@ -98,15 +104,11 @@ export default {
         this.url = url
         // 生成新的name
         this.afterUploadFile(newName, url)  // file 1 文件实体 2 {name, type, size} 自己定义的对象
-      }, () => {
-        console.log(this.fileList)
-        console.log(`this.fileList.length`)
-        console.log(this.fileList.length)
-        console.log('上传失败了')
-        this.uploadError(newName)
+      }, (xhr) => {
+        this.uploadError(xhr, newName)
       })
     },
-    uploadError(newName) {
+    uploadError(xhr, newName) {
       let file = this.fileList.filter(f => f.name === newName)[0]
       console.log('fuck1', file)
       let index = this.fileList.indexOf(file)
@@ -115,6 +117,11 @@ export default {
       let fileListCopy = [...this.fileList]
       fileListCopy.splice(index, 1, fileCopy)
       this.$emit('update:fileList', fileListCopy)
+      let error = ''
+      if (xhr.status === 0) {
+        error = '网络无法连接'
+      }
+      this.$emit('error', error)
     },
     generateName(name) {
       while (this.fileList.filter(f => f.name === name).length > 0) {
@@ -129,16 +136,16 @@ export default {
       let xhr = new XMLHttpRequest()
       xhr.open(this.method, this.action)
       xhr.onload = () => {
-        if (Math.random() > 0.5) {
-          success(xhr.response)
-        } else {
-          fail()
-        }
+        success(xhr.response)
+      }
+      xhr.onerror = () => {
+        fail(xhr, xhr.statusCode)
       }
       xhr.send(formData)
     },
 
     createInput() {
+      this.$refs.temp.innerHTML = ""
       let input = document.createElement('input')
       input.type = 'file'
       this.$refs.temp.appendChild(input)
@@ -146,8 +153,13 @@ export default {
     },
     beforeUploadFile(rawFile, newName, url) {
       let {size, type} = rawFile
-      console.log('插入占位符')
-      this.$emit('update:fileList', [...this.fileList, {name: newName, type, size, status: "uploading"}])
+      if (size > this.sizeLimit) {
+        this.$emit('error', '文件大于2MB')
+        return false
+      } else {
+        this.$emit('update:fileList', [...this.fileList, {name: newName, type, size, status: "uploading"}])
+        return true
+      }
     }
   }
 }
@@ -195,6 +207,7 @@ export default {
     width: 32px;
     height: 32px;
   }
+
   &-spin {
     width: 32px;
     height: 32px;
