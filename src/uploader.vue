@@ -73,10 +73,21 @@ export default {
     onClickUpload() {
       let input = this.createInput()
       input.addEventListener('change', () => {
-        this.uploadFile(input.files[0])
+        // this.uploadFile(input.files[0])
+        this.uploadFiles(input.files)
         input.remove()
       })
       input.click()
+    },
+    uploadFiles(files) {
+      let formData = new FormData()
+      for (let i = 0; i < files.length; i++) {
+        formData.append(this.name, files[i])
+      }
+      let xhr = new XMLHttpRequest()
+      xhr.open(this.method, this.action)
+      xhr.send(formData)
+
     },
     afterUploadFile(newName, url) {
       // 首先从fileList找到要更新的file同时拿到它的index
@@ -148,6 +159,7 @@ export default {
       this.$refs.temp.innerHTML = ""
       let input = document.createElement('input')
       input.type = 'file'
+      input.multiple = true
       this.$refs.temp.appendChild(input)
       return input
     },
