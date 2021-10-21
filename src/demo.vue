@@ -2,11 +2,12 @@
   <div style="margin: 20px">
     {{ error }}
     <div>只能上传 300 kb 以内的 png,jpeg 文件</div>
-    <g-uploader accept="image/*" method="POST" action="http://127.0.0.1:3000/upload" name="files"
+    <g-uploader accept="image/*" method="POST" action="http://127.0.0.1:3000/upload" name="file"
                 :parseResponse="parseResponse" :fileList.sync="fileList"
                 @error="error=$event"
                 :size-limit="1024 * 1024"
     >
+
       <g-button icon="left">上传</g-button>
       <!--      <template slot="tips">-->
       <!--        <div>只能上传 300 kb 以内的 png,jpeg 文件</div>-->
@@ -34,10 +35,13 @@ export default {
   methods: {
 
     parseResponse(response) {
+      console.log(`response`)
+      console.log(response)
       let object = JSON.parse(response)
       let url = `http://127.0.0.1:3000/preview/${object.id}`
       return url
     },
+
 
   }
 }
