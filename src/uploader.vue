@@ -211,54 +211,54 @@ export default {
   }
 }
 </script>
-<style lang='scss' scoped>
-@import '../src/styles/var';
+<!--<style lang='scss' scoped>-->
+<!--@import '../src/styles/var';-->
 
-.gulu-uploader {
+<!--.gulu-uploader {-->
 
-  &-fileList {
-    list-style: none;
+<!--  &-fileList {-->
+<!--    list-style: none;-->
 
-    > li {
-      display: flex;
-      align-items: center;
-      margin: 8px 0;
-      border: 1px solid darken($grey, 10%);
-    }
-  }
+<!--    > li {-->
+<!--      display: flex;-->
+<!--      align-items: center;-->
+<!--      margin: 8px 0;-->
+<!--      border: 1px solid darken($grey, 10%);-->
+<!--    }-->
+<!--  }-->
 
-  &-defaultImage {
-    border: 1px solid red;
-    width: 32px;
-    height: 32px;
-    margin-right: 8px;
-  }
+<!--  &-defaultImage {-->
+<!--    border: 1px solid red;-->
+<!--    width: 32px;-->
+<!--    height: 32px;-->
+<!--    margin-right: 8px;-->
+<!--  }-->
 
-  &-image {
-    margin-right: 8px;
-  }
+<!--  &-image {-->
+<!--    margin-right: 8px;-->
+<!--  }-->
 
-  &-name {
-    margin-right: auto;
+<!--  &-name {-->
+<!--    margin-right: auto;-->
 
-    &.success {
-      color: green;
-    }
+<!--    &.success {-->
+<!--      color: green;-->
+<!--    }-->
 
-    &.fail {
-      color: red;
-    }
-  }
+<!--    &.fail {-->
+<!--      color: red;-->
+<!--    }-->
+<!--  }-->
 
-  &-remove {
-    width: 32px;
-    height: 32px;
-  }
+<!--  &-remove {-->
+<!--    width: 32px;-->
+<!--    height: 32px;-->
+<!--  }-->
 
-  &-spin {
-    width: 32px;
-    height: 32px;
-    @include spin;
-  }
-}
-</style>
+<!--  &-spin {-->
+<!--    width: 32px;-->
+<!--    height: 32px;-->
+<!--    @include spin;-->
+<!--  }-->
+<!--}-->
+<!--</style>-->
